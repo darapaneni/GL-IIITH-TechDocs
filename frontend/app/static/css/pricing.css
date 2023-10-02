@@ -1,0 +1,715 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+body {
+    margin: 0;
+    font-family: "roboto", sans-serif;
+}
+
+.pricing-container {
+    width: 100%;
+    max-width: 1400px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    color: white;
+    background-attachment: scroll;
+    display: block;
+    box-sizing: border-box;
+}
+
+.section-intro{
+    padding-bottom: 10px;
+}
+
+.section-intro h1{
+    color:black;
+    font-size: 36px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.section-intro h4{
+    color:grey;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+:root{
+    --color-1:#262d31;
+    --color-2: #4076b8;
+  }
+
+.section-intro{
+font-family: sans-serif;
+justify-content: center;
+align-items: center;
+}
+
+.section-intro .plan-switch{
+    width: 233px;
+    background: var(--color-1);
+    height: 55px;
+    appearance: none;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+
+}
+
+.section-intro .toggle-switch-container{
+    position:relative;
+    color: #fff;
+    display: inline-block;
+    left: 540px;
+    top: 25px;
+}
+
+.section-intro .toggle-switch-container .Monthly{
+    position: absolute;
+    left: 34px;
+    top:18px;
+    pointer-events: none;
+}
+
+.section-intro .toggle-switch-container .Yearly{
+    position: absolute;
+    right: 32px;
+    top: 18px;
+    pointer-events: none;
+}
+
+.section-intro .plan-switch::before{
+    content: "";
+    position: absolute;
+    height: 50px;
+    width: 115px;
+    border-radius: 24px;
+    background: var(--color-2);
+    top: 50%;
+    transform: translateY(-50%);
+    left: 2px;
+    transition: all 0.1s;
+}
+
+.section-intro .plan-switch:checked::before{
+    left: 120px;
+    width: 110px;
+}
+    
+
+.plan-cards {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+.section-style{
+    width: 110px;
+    height: 12px;
+    margin: 20px auto 0;
+    position: relative;
+}
+
+.section-style::before{
+    content: "";
+    width: 80px;
+    height: 1px;
+    background-color: aliceblue;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.section-style::after{
+    content: "";
+    width: 80px;
+    height: 1px;
+    background-color: aliceblue;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+/* .pricing-table_wrapper{
+    padding-top: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    max-width: 1600px;
+    display: block;
+} */
+
+.pricing-cards{
+    width: 100%;
+    position: relative;
+    top: 25px;
+    left: 0;
+    box-sizing: border-box;
+    display: block;
+}
+
+.row_1{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.plan-card{
+    width: 500px;
+    margin: 20px;
+    background-color: #d0d8db;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 0 5px 5px rgba(40, 25,114,0.1);
+    transition: all .3s;
+}
+
+.plan-card .card-pricing_header{
+    padding: 30px 10px;
+    border-radius: 1px solid #ebebeb;
+}
+
+.card-pricing_header{
+    border-bottom: 1px solid #ebebeb;
+}
+
+.plan-card .card-pricing_header h4{
+    margin-bottom: 5px;
+    color: #1d2441;
+    font-size: 27px;
+    font-weight: 900;
+}
+
+.plan-card .card-pricing_header p{
+    margin-bottom: 27px;
+    color: #4e4e4e;
+    font-size: 16px;
+}
+
+.card-pricing_price{
+    font-size: 40px;
+    padding: 0;
+    color: #000;
+}
+
+.card-pricing_price .rupee{
+    font-size: 30px;
+    vertical-align: top;
+    color: #000;
+}
+
+.card-pricing_price .type{
+    font-size: 25px;
+    vertical-align:text-bottom;
+    color: #000;
+}
+
+.card-pricing_price2 span{
+    margin-right: 3px;
+    font-size: 30px;
+    position: relative;
+    bottom: 5px;
+    vertical-align: middle;
+}
+
+.card-pricing_list{
+    padding: 40px 10px;
+    text-align: left;
+    text-indent: 100px;
+    list-style:none;
+    
+}
+
+.card-pricing_list li{
+    margin-bottom: 15px;
+    color: #4e4e4e;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.0;
+}
+
+.card-pricing_button{
+    padding:10px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.card-pricing_button .button{
+    padding: 15px 35px;
+    color: #1925c6;
+    background:transparent;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #424244;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.dot{
+    font-size: 150%;
+    /* vertical-align: bottom; */
+}
+
+.Features{
+    font-weight: 900;
+    color: #000;
+    text-align: left;
+    text-indent: 100px;
+    margin-bottom: 12px;
+}
+
+.Features-1{
+    font-weight: bold;
+    color: #000;
+    text-align: left;
+    text-indent: 100px;
+    margin-bottom: 12px;
+}
+
+/* Add hover effect on card elements */
+
+.plan-card:hover{
+    background: #ffffff;
+    box-shadow: 0 20px 25px 5px rgba(33, 25,114,0.1);
+}
+
+.plan-card:hover .card-pricing_header h4,
+.plan-card:hover .card-pricing_header p,
+.plan-card:hover .card-pricing_price,
+.plan-card:hover .rupee,
+.plan-card:hover .type{
+    color: #312ecd;
+}
+
+.plan-card:hover .card-pricing_button .button{
+    color: #faf9ff;
+    background: linear-gradient(to right, #2b0076 0%, #3a0ebe 100%);
+}
+
+/* Adding tooltip text with hover */
+
+.tooltip {
+    position: relative;
+    /* border-bottom: 1px dashed #666; */
+    cursor: pointer;
+    padding: 5px 12px;
+    margin: 5px;
+    font-size: 15px;
+    border-radius: 50%;
+    background: #fff;
+    color: #fff;
+}
+
+
+.tooltip::before,
+.tooltip::after{
+    position: absolute;
+    content: attr(data-tooltip);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.tooltip::before{
+    border-width: 10px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+    top: 0px;
+    transform: translateY(0px);
+}
+
+.tooltip::after{
+    content: attr(data-tooltip);
+    background: #333;
+    width: max-content;
+    height: 40px;
+    vertical-align:top;
+    font-size: 13px;
+    font-weight: 300;
+    top: 0%;
+    left: 100%;
+    padding: 0;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    transform: translateY(0px);
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+
+/* ------------------------------- */
+
+@media screen and (max-width:1200px) {
+    .pricing-table_wrapper{
+        padding-top: 1px;
+    }
+    .pricing-cards{
+        position: static;
+    }
+}
+
+
+
+
+
+/* -------------------- */
+
+
+.compare-table{
+    width:100%;
+    padding-top: 60px;
+    display: block;
+    box-sizing: border-box;
+}
+
+.ComparePlans{
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+/* .compare-wrapper{
+    width:100%;
+    padding:0 60px;
+    box-sizing:border-box;
+    text-align:center
+} */
+
+@media (min-width: 801px)
+{#indexContent, .compare-wrapper{
+    max-width: 1025px;
+}}
+    
+
+#indexContent, .compare-wrapper {
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    /* font-size: inherit; */
+    line-height: inherit;
+}
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+
+
+button {
+    overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+    /* margin: 0; */
+    font: inherit;
+    /* color: inherit; */
+}
+
+.compare-table-button {
+    /* font-size: 14px; */
+    font-weight: 500;
+    display: inline-block;
+    transition: .2s all ease;
+    border: 1px solid transparent;
+    background: #fff;
+    box-shadow: -1px 4px 13px 2px #e1f2ff;
+    padding: 10px 16px;
+    border-radius: 0;
+    /* color: #0d63dd; */
+    user-select: none;
+}
+
+.compare-table-button{
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    transition: .2s all ease;
+    border: 1px solid transparent;
+    background: #fff;
+    box-shadow: -1px 4px 13px 2px #e1f2ff;
+    padding: 10px 16px;
+    border-radius: 0;
+    color: #0d63dd;
+    user-select: none;
+}
+
+style attribute {
+    cursor: pointer;
+    line-height: 1;
+    text-align: center;
+    margin-top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+.button-1{
+    background-size: 200%!important;
+    transition: .4s;
+    color: #000;
+    padding: 15px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.button-1:hover {
+    background:black;
+    color: white;
+}
+
+.button-1 svg {
+    margin-left: 8px;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+
+.PricingComparison {
+    color: #333;
+    margin-top: 50px;
+}
+
+.P-row_1 {
+    border-bottom: 1px solid #dadada;
+    display: block;
+    z-index: 1;
+}
+
+.PricingComparisonTitle {
+    font-size: 16px;
+    position: sticky;
+    /* display: block; */
+    box-sizing: border-box;
+    font-weight: 300;
+    color: #000;
+    line-height: 50px;
+    border-bottom: 1px rgb(180, 180, 180) solid;
+    border-collapse: collapse;
+}
+
+.z-2{
+    z-index: 2;
+}
+
+.row_1 {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.row_1:before {
+    display: block;
+    content: " ";
+}
+
+body {
+    --responsive-gutter-width: 44px;
+}
+
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+.col-md-4, .col-sm-4{
+    padding-right: calc(var(--responsive-gutter-width) / 2);
+    padding-left: calc(var(--responsive-gutter-width) / 2);
+    position: relative;
+    min-height: 1px;
+    float: left;
+}
+
+@media (min-width: 992px){
+    .col-md-4 {
+        width: 40%;
+        float: left;
+    }
+} 
+
+
+.PricingComparison {
+    color: #333;
+    margin-top: 50px;
+}
+
+.PlanFeatureTitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    line-height: 50px;
+    position: relative;
+}
+
+.buy-button-1 .button-2{
+    padding: 0 30px;
+    color: #1925c6;
+    background:transparent;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid #424244;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.buy-button-2 .button-3{
+    padding: 0 20px;
+    color: #1925c6;
+    background:transparent;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid #424244;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.buy-button-1, .buy-button-2{
+    padding-bottom: 5px;
+}
+
+.buy-button-1{
+    background-color: #f9f9f9;
+}
+
+.buy-button-2{
+    background-color: #f1f1f1;
+}
+
+.button-2:hover,
+.button-3:hover{
+    color: #faf9ff;
+    background: linear-gradient(to right, #2b0076 0%, #3a0ebe 100%);
+}
+
+.PricingComparison, .F-Column {
+    padding: 0;
+}
+
+.F-Column {
+    text-align: center;
+}
+
+.col-md-2 {
+    width: 30%;
+    float: left;
+}
+
+
+.col-md-2 ,
+.col-sm-2{
+    position: relative;
+    min-height: 1px;
+}
+
+.PricingPlanName {
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 50px;
+}
+
+.Pricing-Highlight {
+    border-bottom: 0;
+    background: #f1f1f1;
+    margin-right: -1px;
+}
+
+.Pricing-Highlight_1 {
+    border-bottom: 0;
+    background: #f9f9f9;
+    margin-right: -1px;
+}
+
+.row_1:after, .row_1:before {
+    display: table;
+    content: " ";
+    clear: both;
+}
+
+.Category-wrapper .Basic-Plan, .Category-wrapper .Premium-Plan, .Category-wrapper .Category-title {
+    padding-top: 20px;
+    border: 0;
+    min-height: 51px;
+}
+
+.Category-title {
+    font-size: 18px;
+    padding: 10px 0;
+    font-weight: 700;
+    color: #000;
+}
+
+.PlanFeatureTitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    line-height: 50px;
+    position: relative;
+}
+*{
+    box-sizing: border-box;
+}
+
+
+.FeatureName {
+    border-bottom: 1px dashed #666;
+    color: black;
+    cursor: pointer;
+    padding-bottom: 2px;
+}
+
+.FeatureInfo {
+    cursor: pointer;
+}
+/* .FeatureName #data-bs-title{
+    background-color: #000;
+} */
+
+.PlanAvailableTxt {
+    font-size: 20px;
+}
+
+.Basic-Plan, .Premium-Plan-1, .Premium-Plan{
+    padding: 12px;
+    min-height: 50px;
+    padding-top: 15px;
+}
+
+.Basic-Plan{
+    background: #f9f9f9;
+}
+
+.Premium-Plan {
+    background: #f1f1f1;
+    color: #4210c1;
+}
+
+.PlanAvailableDot {
+    font-size: 20px;
+}

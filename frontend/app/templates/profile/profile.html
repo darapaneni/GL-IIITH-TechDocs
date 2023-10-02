@@ -1,0 +1,195 @@
+{% extends "dashboard-layout.html" %}
+
+{% block pageCss%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+<link rel="stylesheet" href="//unpkg.com/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css" type="text/css" />
+<link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.2.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
+<style>
+  .dropdown-menu
+  {
+    width:100px;
+  }
+</style>
+{% endblock %}
+
+
+{% block body %}
+<script src="js/statepicker.js"></script>
+<script src="js/profile.js"></script>
+<script src="//unpkg.com/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+<script src="//unpkg.com/bootstrap-select-country@4.2.0/dist/js/bootstrap-select-country.min.js"></script>
+<div id="profilepage" class="mt-5">  
+<div id="profilepageheader"><h2 style="margin-bottom: 0px;">User Account Settings</h2></div> 
+<div id="accordion" >
+  <h3>Update Profile Info</h3>
+  <div>
+      
+      <form action="" method="post" name="profile" id="profileForm" enctype="multipart/form-data">
+        <div class="row bg-secondary bg-gradient text-white small shadow  p-2 mb-2 rounded">
+          <div class="col col-md">
+            <label for="signupdate">Signed up on</label>
+            <label name="signupdate" id="signupdate"></label>
+          </div>
+          <div class="col col-md">
+            <label for="activedate">Last Active</label>
+            <label name="activedate" id="activedate"></label>
+          </div>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control namegroup" name="first-name" id="first-name" placeholder="First Name">
+          <label for="first-name">First Name</label>
+        </div>
+        
+        <div class="form-floating mt-2">
+          <input type="text" class="form-control namegroup" name="last-name" id="last-name" placeholder="Last Name">
+          <label for="last-name">Last Name</label>
+        </div>
+
+        <div class="form-floating mt-2">
+          <input type="text" class="form-control " name="address" id="address" placeholder="Address">
+          <label for="address">Street Address</label>
+        </div>
+
+        <div class="form-floating mt-1">
+        <select   
+        name="country" 
+        id="country" 
+       size="5"
+        class="selectpicker countrypicker form-control pt-0 pb-0" 
+        data-dropup-auto="false"
+        
+        data-boundary="scrollParent"
+        data-width="false"
+        data-live-search="true"
+        data-style-base="form-control pt-4 mt-1"
+        data-live-search-style="startsWith"
+        data-live-search-normalize="true"
+        data-none-selected-text="please select..."
+        data-flag="true" ></select>
+        <label for="country">Country</label>
+        </div>
+
+        <div class="form-floating mt-1">
+          <select   
+          name="state" 
+          id="state" 
+          size="5"
+          class="selectpicker form-control pt-0 pb-0"
+          data-dropup-auto="false"
+        data-boundary="scrollParent"
+        data-width="false"
+        data-style-base="form-control pt-4 mt-1"
+        data-live-search="true"
+        data-live-search-style="startsWith"
+        data-live-search-normalize="true" 
+        data-none-selected-text="please select..."
+          ></select>
+          <label for="state">State</label>
+          </div>
+          <div class="form-floating mt-2">
+            <input type="textarea" class="form-control " name="occupation" id="occupation" placeholder="Address">
+            <label for="occupation">Occupation</label>
+          </div>
+          <div class="form-floating mt-1">
+            <select   
+            name="purpose" 
+            id="purpose" 
+            size="5"
+            class="selectpicker form-control pt-0 pb-0"
+            data-style-base="form-control pt-4 mt-1"
+            data-dropup-auto="false"
+          data-boundary="scrollParent"
+          data-width="false"
+          data-none-selected-text="please select..."
+          >
+          <option value="Research">Research</option>
+          <option value="Commercial">Commercial</option>
+          <option value="Student">Student</option>
+        </select>
+            <label for="purpose">Purpose of use</label>
+            </div>
+
+        <script>
+          $('.countrypicker').countrypicker();
+        
+        </script>          
+        
+        <div class="d-grid gap-2 mt-3">
+          <div id="profile-errorMessage" class="errorMessage"></div>
+          <button type="submit" class="btn btn-primary" name="profile_method" value="profil" id="profile-btn">Update</button>   
+        </div>
+       
+       
+      </form>
+    
+  </div>
+  <h3>Change Password</h3>
+  <div>
+    <form action="" method="post" name="password" id="password"  enctype="multipart/form-data" >
+      <div class="form-floating">
+        <input type="password" class="form-control" name="current-password" id="current-password" placeholder="Current Password" required aria-required="true">
+        <label for="current-password">Current Password</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input type="password" class="form-control" name='new-password' id="new-password" placeholder="New Password" required aria-required="true">
+        <label for="new-password">New Password</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input type="password" class="form-control" name='confirm-password' id="confirm-password" placeholder="Confirm Password" required aria-required="true">
+        <label for="confirm-password">Confirm Password</label>
+      </div>
+    
+      <div class="d-grid gap-2 mt-4">
+        <div id="password-errorMessage" class="errorMessage"></div>
+        <button type="submit" class="btn btn-primary" name="password_method" value="password" id="password-btn">Change</button>   
+      </div>
+     
+     
+    </form>
+
+     
+    
+  </div>
+  
+  <h3>Delete account</h3>
+  <div>
+    <strong>This will delete your account & all associated files</strong>
+    <form action="" method="post" name="deleteAccount" id="deleteAccount"  enctype="multipart/form-data" >
+      <div >
+        <div class="form-floating" id="nativedelete">
+          <input type="password" class="form-control" name="delete-password" id="delete-password" placeholder="Current Password" required aria-required="true">
+          <label for="current-password">Password</label>
+        </div>
+        <div id="googledeletetext" class="d-flex p-2 bg-light bd-highlight" style="display:none">
+          Verify your account with Google.
+        </div>
+        <div id="googledelete" style="display:none">
+            
+        </div>
+        <div class="d-flex p-2 bg-light bd-highlight" id="accountVerified"></div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name='confirm-delete' id="confirm-delete"  required aria-required="true">
+          <label class="form-check-label" for="confirm-delete">Confirm that you understand the consequences</label>
+        </div>
+        <div id="delete-errorMessage" class="errorMessage"></div>
+        <div class="d-grid gap-2 mt-4">
+          <button type="submit" class="btn btn-primary" name="delete_method" value="password" id="delete-btn">Delete</button>   
+        </div>
+      </div>
+      
+      
+     
+    </form>
+   
+  </div>
+  <h3>Link to Cloud Store</h3>
+  <div>
+    <p>
+    Not in scope currently.
+    </p>
+    
+  </div>
+</div>
+</div>
+
+{% endblock %}

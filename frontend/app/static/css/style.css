@@ -1,0 +1,111 @@
+*{
+  margin:0; 
+  padding:0;
+}
+.logo{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo img {
+    width: 33%;
+    border: 3px solid white;
+    border-radius: 50px;
+
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+}
+
+.nav-list{
+    
+width: 100%;
+display: flex;
+align-items: center;
+}  
+.nav-list li{
+    list-style: none;
+    padding: 26px 30px;
+
+}
+.nav-list li a{ 
+    text-decoration: none;
+    color: white;
+}
+.nav-list li a:hover {
+    text-decoration: none;
+    color: grey;
+}
+
+.rightnav{
+    
+    width: 100%;
+    text-align: right;
+}
+
+.SEARCH{
+    padding: 5px;
+    font-size: 17px;
+    border: 2px solid rgb(223, 7, 7);
+    border-radius: 9px;}
+    
+.background{
+    background: rgba(0, 0, 0, 0.7) url(/techdocb.jpg);
+    background-size: cover;
+    background-blend-mode: darken;
+
+}
+.fisrtsection{
+    height: 100vh;
+} 
+.firsthalf{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.secondhalf{
+    width: 10%;}
+.secondhalf img{
+    width: 70%;
+    border: 4px snow;
+    border-radius: 150px;
+}  
+
+
+
+.box-main{
+display: flex;
+justify-content: center;
+align-items: center;
+color: aliceblue;
+margin: auto;
+height: 45%; 
+}
+ 
+ .btncolor{
+    background-color: rgb(240, 240, 151);
+    padding: 8px 20px;
+    border: 2px snow;
+    border-radius: 8px;
+    cursor: pointer;
+ }
+ .textbig{
+    font-size: 50px;
+    text-align: center;
+
+
+ }
+.textsmall{
+    font-size: 25px;
+    text-align: center;
+
+}
+

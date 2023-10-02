@@ -1,0 +1,32 @@
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+</head>
+<body style="margin-left:100px; padding:10">
+    <form action="/status" method="POST">
+        <p> Hello {{custName}}.</p>
+        <p></p>
+        <p> For your order {{descr}}, the total order amount is {{amtD}}.</p> 
+        <p> Please click on "Pay Now" to proceed.</p>
+        <p></p> 
+
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key={{key}}
+            data-amount={{amt}}
+            data-currency={{currency}}
+            data-name={{name}}
+            data-description={{descr}}
+            data-netbanking="true"
+            data-order_id={{orderId}}
+            data-prefill.name={{custName}}
+            data-prefill.email="techdocs.gl@gmail.com"
+            data-prefill.contact="9999999999">
+        </script>
+    </form>
+</body>
+</html>
+
+
+
+
