@@ -1,5 +1,4 @@
-
-# TechDocs - Document Management System
+# TechDocs - Frontend
 
 It is a dockerized, mobile-ready, offline-storage compatible, JS-powered Latex editor.
 
@@ -15,22 +14,13 @@ It is a dockerized, mobile-ready, offline-storage compatible, JS-powered Latex e
 - Share with specific permissions
 - Manage Trash
 - Download PWA Application into Mobile/Desktop 
+- Edit in offline mode
 
 
 ## Tech
 
+Techdocs fronted uses a number of open source projects
 
-
-### Backend
-TechDocs backend is built on these open source softwares:
-- [Python] : General purpose coding
-- [Python Flask] : For API endpoint handling
-- [SQLAlchemy] : SQL Operations
-- [MySQL] : Database
-- [Mailjet] : SMTP server
-
-### Frontend
-TechDocs fronted uses a number of open source projects
 - [Bootstrap] : great UI boilerplate for modern web apps
 - [Python Flask]  : For URL Based Routing & Rendering HTML Templates
 - [jQuery] - UI/UX Actions/Events on HTML Documents
@@ -38,41 +28,37 @@ TechDocs fronted uses a number of open source projects
 
 ## Installation
 
-### [Frontend]
+TechDocs-Frontend requires Docker
+
+Clone the Repository and then run the following commands
+
 ```bash
-git clone https://github.com/prernawaghray/GL-TechDocs.git
+# Get Into the folder
 cd GL-TechDocs/frontend
-
-# Check the code in start.sh and make sure if port is 56733 for dev purpose and 80/443 for production purpose
-sudo bash start.sh
-
-# Docker container[techdocs-frontend] will be built & it will run. Get into docker and install node packages
-docker exec -it techdocs-frontend bash
-npm install
-exit
 ```
-Check http://localhost:56733 in the browser.
-### [Backend]
+### For Linux
 ```bash
-#On your AWS EC2 instance, run the following commands:
-
-cd /home/ec2-user
-
-mkdir -p /techdocs_filesystem/log
-
-touch /techdocs_filesystem/log/filemanager.log
-
-git clone https://github.com/prernawaghray/GL-TechDocs.git
-
-cd GL-TechDocs/backend
-
-#Update the docker-compose.yml file line#11 with below:
-/home/ec2-user/techdocs_filesystem:/tmp
-
-docker-compose up --build --scale app=3 -d
+# Run Helper script which will build & Run a docker container
+sudo bash start.sh
 ```
+
+### For Windows
+```bash
+# Run Helper script which will build & Run a docker container
+.\start.ps1
+```
+
+Now, Check http://localhost:56733
+
+
+## Development
+
+Want to contribute? Great!
+
+
 ## License
 
+MIT
 
 **Free Software, Hell Yeah!**
 
@@ -82,3 +68,4 @@ docker-compose up --build --scale app=3 -d
    [jQuery]: <http://jquery.com>
    [Python Flask]: <https://flask.palletsprojects.com/en/2.2.x/>
    [LatexJS]: <https://latex.js.org/>
+   
