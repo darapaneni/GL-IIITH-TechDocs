@@ -12,16 +12,17 @@ from .mail import send_reset_email, verify_reset_token
 from sqlalchemy import create_engine, select, update
 
 
-
-#PREFIX = "/api"
-
 forgotpassword_bp = Blueprint('forgotpassword',__name__)
 
 @forgotpassword_bp.route('/api/forgot-password', methods=['GET','POST'])
+
 def forgot_password():
-    
+    req = request.json
+    if not req :
+        req = request.form 
+
     if request.method == "POST":
-        data = (request.form["email_id"])
+        data = req['email_id']
 
         #user = User.query.filter_by(username=data).first()
         session = session_factory()
@@ -48,16 +49,18 @@ def forgot_password():
 
 def reset_password():
     bcrypt = Bcrypt(current_app)
+    req = request.json
+    if not req :
+        req = request.form 
+
     if request.method == "POST":
         key = current_app.config['SECRET']
-        token = (request.form["token"])
-        new_password = (request.form["new_password"])
+        token = (req["token"])
+        new_password = (req["new_password"])
         user_id = verify_reset_token(token)
-        #print(token)
-        #print(new_password)
         new_password = bcrypt.generate_password_hash(new_password)
         #print(new_password)
-        #print(user_id)
+        print('user_id:'+user_id)
         if user_id == None:
             return make_response(jsonify({'message': 'Error'}), 401)
         else:
@@ -79,8 +82,12 @@ def reset_password():
 @forgotpassword_bp.route('/api/validate-token', methods=['GET', 'POST'])
 
 def validate_token():
+    req = request.json
+    if not req :
+        req = request.form 
+
     if request.method == "POST":
-        data = (request.form["token"])
+        data = (req["token"])
         print(data)
         user_id = verify_reset_token(data)
         print(user_id)
