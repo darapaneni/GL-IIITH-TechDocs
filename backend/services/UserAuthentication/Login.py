@@ -22,14 +22,16 @@ from sqlalchemy import create_engine, select, update
 userLogin_bp = Blueprint('login',__name__)
 
 @userLogin_bp.route('/api/signin', methods=['GET', 'POST'])
+
 def signin():
-    bcrypt = Bcrypt(current_app)
+    bcrypt = Bcrypt(current_app)  
+    req = request.json
+    if not req :
+        req = request.form    
     if request.method == 'POST':
-        loginType = request.form.get('loginType')
-        username  = request.form.get('email')
-        # content = request.get_json(silent=True)
-        # loginType = content["loginType"]
-        # username = content["email"]
+        loginType = req['loginType']
+        username  = req['email']        
+        
         # Checking for the Login Type
         if loginType == 'google':
             session = session_factory()
@@ -38,7 +40,6 @@ def signin():
             result_2 = session.execute(sql_stmt_2).first()
             result = session.execute(sql_stmt).first()
             session.close()
-        #if user is registered
         
             if result:
                 if result[2] == 'google':
@@ -66,8 +67,7 @@ def signin():
 
 # checking for the login type 
         elif loginType == "email":
-            password = request.form.get('password')
-            # password = content["password"]
+            password = req['password']            
             if password:
                 session = session_factory()
                 sql_stmt = (select(User.UserId, User.IsAdmin, User.Password, User.LoginType).where (User.UserName == username))
@@ -76,8 +76,7 @@ def signin():
                 result = session.execute(sql_stmt).first()
                 session.close()
 
-                if result:
-            
+                if result:            
                     if result[3] == "google":
                         data_sent = {"message":"User registered with google please login via google"} 
                         return make_response(jsonify(data_sent),401)
@@ -100,21 +99,21 @@ def signin():
                                                 "LastName":lastname}
                             return make_response(jsonify(data_sent), 200) 
                         else:
-                            data_sent = {"message":"Invalid Password"} 
+                            data_sent = {"message":"Invalid Password Provided"} 
                             return make_response(jsonify(data_sent),401)
                     else:
-                        data_sent = {"message":"User not Registered"} 
+                        data_sent = {"message":"User not found"} 
                         return make_response(jsonify(data_sent),401)
                 else:
-                    data_sent = {"message": "User not Registered"}
+                    data_sent = {"message": "User not found or Registered"}
                     return make_response(jsonify(data_sent), 401)            
             else:
-                data_sent = {"message":"User not Registered"}
+                data_sent = {"message":"Password Not provided"}
                 return make_response(jsonify(data_sent), 401)
         else:
-            data_sent = {"message":"User not Registered"} 
+            data_sent = {"message":"Login Type not recognized"} 
             return make_response(jsonify(data_sent),401)
         
     else:
-        data_sent = {"message":"Invalid method"} 
+        data_sent = {"message":"Reuest method is Invalid."} 
         return make_response(jsonify(data_sent),401)
