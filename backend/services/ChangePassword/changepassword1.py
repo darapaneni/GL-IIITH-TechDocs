@@ -22,8 +22,9 @@ def changepassword(user_id):
     bcrypt = Bcrypt(current_app)       
     if request.method == 'POST':
         # Receiving Current password and new password
-        currentPassword = request.form.get('currentPassword')
-        newPassword = request.form.get('newPassword')
+        content = request.get_json(silent=True)
+        currentPassword = content["currentPassword"]
+        newPassword = content["newPassword"]
         if currentPassword:
             session = session_factory()
             sql_stmt = (select(User.Password, User.LoginType).where (User.UserId == user_id))
