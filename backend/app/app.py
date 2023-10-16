@@ -28,6 +28,7 @@ from services.ForgotPassword.mail import mail_bp
 from services.DocumentVersionManager.DocumentVersionManager import documentVersionManagerBlueprint
 from services.UserHistoryManager.UserHistoryManager import userHistoryManagerBlueprint
 from services.RazorpayIntegration.razorPay import razorPayBlueprint
+from services.RazorpayIntegration.razorpayDB import *
 from services.Permissions.permissions import permissions_bp
 # For logging 
 from sentry_sdk.integrations.flask import FlaskIntegration
@@ -50,7 +51,7 @@ sentry_sdk.init(
     # release="myapp@1.0.0",
 )
 
-app= Flask(__name__)
+app= Flask(__name__, template_folder='/home/ubuntu/GL-TechDocs/backend/services/RazorpayIntegration/templates')
 CORS(app, resources={r"/*":{"origins":"*"}})
 app.config.from_object('config.ProdConfig')
 
