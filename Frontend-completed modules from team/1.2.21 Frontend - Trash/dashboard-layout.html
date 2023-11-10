@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block layoutCss %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard-layout.css') }}">
+  {% block pageCss %}{% endblock%}
+{% endblock %}
+
+{% block layout %}
+
+<nav class="navbar navbar-expand-lg bd-navbar bg-light">
+  <div class="container">
+    
+    <a href="/dashboard" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+      <img src="{{url_for('static',filename='images/icons/android-chrome-192x192.png')}}" class="header-logo"/>
+      <span class="header-text">TechDocs</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- MOBILE RESPONSIVE MENU -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item"><a href="#" onclick="window.location.href='{{url_for('dashboard')}}'" class="nav-link px-2 link-secondary">Dashboard</a></li>
+          <!--Features Drop-down-->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-2 link-dark" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Features
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item active" href="{{url_for('premium_features')}}">Premium Features</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="{{url_for('writing')}}">For Writing</a></li>
+            <li><a class="dropdown-item" href="{{url_for('teaching')}}">For Teaching</a></li>
+            <li><a class="dropdown-item" href="{{url_for('group')}}">For Group</a></li>
+            <li><a class="dropdown-item" href="{{url_for('university')}}">For Universities</a></li>
+            <li><a class="dropdown-item" href="{{url_for('publisher')}}">For Publishers</a></li>
+          </ul>
+        </li>
+          <li class="nav-item"><a href="#" onclick="window.location.href='{{url_for('plans')}}'" class="nav-link px-2 link-dark">Pricing</a></li>
+          <li class="nav-item"><a href="#" onclick="window.location.href='{{url_for('faq')}}'" class="nav-link px-2 link-dark">Help</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>   Account
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{url_for('profile')}}">Account Settings</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#" onclick="logoutButtonClicked()">Logout</a></li>
+            </ul>
+          </li>
+        </ul> 
+
+      </div>
+      <div class="offcanvas-footer text-center bg-light">
+        <div>&copy; TechDocs</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- SIDEBAR MENU -->
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="position-sticky pt-3 sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="#" onclick="getfilelist()">
+          <i class="bi bi-file-earmark-bar-graph-fill" style="font-size: 16px; padding-right: 5px;"></i>
+          My Documents
+        </a>
+      </li>
+      <li class="nav-item" id="shared">
+        <a class="nav-link" href="#" onclick="sharedlist()">
+          <i class="bi bi-share-fill" style="font-size: 16px; padding-right: 5px;"></i>
+          Shared By Others
+        </a>
+      </li>
+      <li class="nav-item" id="archived">
+        <a class="nav-link" href="#">
+          <i class="bi bi-archive-fill" style="font-size: 16px; padding-right: 5px;"></i>
+          Archived
+        </a>
+      </li>
+      <li class="nav-item {% if active_tab == 'trash' %}active{% endif %}" id="trashed">
+        <a class="nav-link" href="{{ url_for('trashPage') }}">
+            <i class="bi bi-trash3-fill" style="font-size: 16px; padding-right: 5px;"></i>
+            Trash
+        </a>
+    </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+<main class="container-fluid body-main mt-2">
+  {% block body %}{% endblock %}
+</main>
+
+
+
+{% endblock %}
+
+{% block layoutJS %}
+
+  {% block pageJS %}{% endblock%}
+
+{% endblock %}
