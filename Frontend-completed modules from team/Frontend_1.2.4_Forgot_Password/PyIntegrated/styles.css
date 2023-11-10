@@ -1,0 +1,92 @@
+/* Resetting default margin and padding for elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Basic styles for the navigation bar */
+  .navbar {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .navbar-brand span {
+    font-size: 1.5em;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .navbar-links li {
+    margin-right: 20px;
+  }
+  
+  .navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+  }
+  
+  .navbar-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .password-reset-form {
+    width: 30%; /* Reduce the width */
+    margin: 50px auto 0; /* Center the form and add space from the top */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .password-reset-form h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .password-reset-form p {
+    margin-bottom: 20px;
+  }
+  
+  .password-reset-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .password-reset-form label {
+    margin-bottom: 8px;
+  }
+  
+  .password-reset-form input {
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .password-reset-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(to right, #4CAF50, #2E8540); /* Gradient background */
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  
+  .password-reset-form button:hover {
+    background-color: #0056b3;
+  }
+  

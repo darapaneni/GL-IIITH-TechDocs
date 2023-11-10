@@ -1,0 +1,40 @@
+{% extends "marketing-layout.html" %}
+
+{% block pageCss%}
+  <link rel="stylesheet" type="text/css" href="styles.css">
+{% endblock %}
+
+{% block body %}
+<script src="js/resetpassword.js"></script>
+
+    
+  <div class="password-reset-form">
+    <h2 style="margin-bottom: 0px;">Reset Your Password</h2>
+    <br>
+
+    <div id="loadingbutton">
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Loading...
+        </button>
+    </div>
+    <div class="d-grid mt-1" id="validtokenerormessage">
+        <span id="valid-token-errorMessage" class="errorMessage"></span><br>
+    </div>
+
+
+    <form action="" method="post" name="reset-password" id="reset-password" enctype="multipart/form-data" style="display: none;">
+      <label for="new-password">New Password:</label>
+      <input type="password" class="form-control" name='new-password' id="new-password" placeholder="New Password" required aria-required="true">
+      
+      <label for="confirm-password">Confirm New Password:</label>
+      <input type="password" class="form-control" name='confirm-password' id="confirm-password" placeholder="Confirm Password" required aria-required="true">
+      
+      <div class="d-grid gap-2 mt-4">
+        <div id="password-errorMessage" class="errorMessage"></div>
+        <button type="submit" class="btn btn-primary" name="password_method" value="password" id="password-btn">Change</button>   
+      </div>
+    </form>
+  </div>
+
+  {% endblock %}
