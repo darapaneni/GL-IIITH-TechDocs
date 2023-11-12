@@ -32,7 +32,7 @@ class Document(Common):
     ModifiedBy      = Column(String(256))  
     User            = relationship('User')    
     
-    def __init__(self, UserId, DocName, Filepath, Datetime, Version, IsUpload, IsTrash):
+    def __init__(self, UserId, DocName, Filepath, Datetime, Version, IsUpload, IsTrash, checkout_flag):
         self.UserId      = UserId
         self.DocName     = DocName
         self.FilePath    = Filepath
@@ -40,6 +40,7 @@ class Document(Common):
         self.Version     = Version
         self.IsUpload    = IsUpload
         self.IsTrash     = IsTrash
+        self.checkout_flag = checkout_flag
   
 #############################
 

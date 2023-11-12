@@ -19,10 +19,11 @@ class Common(Base):
     s_Misc2         = Column(String(1024))
     n_Misc1         = Column(Integer)
     n_Misc2         = Column(Integer)
+    checkout_flag   = Column(Integer)
     
  
     #Constructor methods to insert data into Documents table
-    def __init__(self, UserId, DocName, Filepath, Datetime, Version, IsUpload, IsTrash):
+    def __init__(self, UserId, DocName, Filepath, Datetime, Version, IsUpload, IsTrash, checkout_flag):
         self.UserId      = UserId
         self.DocName     = DocName
         self.FilePath    = Filepath
@@ -30,3 +31,4 @@ class Common(Base):
         self.Version     = Version
         self.IsUpload    = IsUpload
         self.IsTrash     = IsTrash
+        self.checkout_flag = checkout_flag
