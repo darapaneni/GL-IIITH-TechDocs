@@ -2,7 +2,46 @@ from flask import render_template, request, url_for,session
 from flask import make_response, redirect
 from app import app
 
+## 4xx and 5xx Error handling
+@app.errorhandler(400)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/400.html')
 
+@app.errorhandler(401)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/401.html')
+
+@app.errorhandler(403)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/403.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/404.html')
+
+@app.errorhandler(500)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/500.html')
+
+@app.errorhandler(501)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/501.html')
+
+@app.errorhandler(502)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/502.html')
+
+@app.errorhandler(504)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/504.html')
 
 '''Login Authorization Wrapper'''
 #def login_required(function): 
