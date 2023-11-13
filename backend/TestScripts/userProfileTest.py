@@ -23,7 +23,7 @@ json_obj={
             'lastName':'Mk',
                     
             'address':{
-                'streetAddress':'Hs',
+                'streetAddress':'N S C Bose Road',
                 'state': 'WB',
                 'country': 'IND',
                     },

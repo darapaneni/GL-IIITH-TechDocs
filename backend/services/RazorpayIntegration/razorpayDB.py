@@ -1,14 +1,31 @@
 # DB Connector library
+import os
+import yaml
+import os.path
+import logging
 import mysql.connector
+from mysql.connector import connect, errorcode
+import os
+from dotenv import load_dotenv
 
 # Function to insert the record in transactions table
 def insert_rec(**payment_details):
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    env = os.path.join(basedir,'../../.env.local')
+    if os.path.exists(env):
+        load_dotenv(env)
+    url = os.environ.get('DB_URL')
+    db_conn = os.environ.get('DB_CONN')
+    db_database = os.environ.get('DB_NAME')
+    db_user = os.environ.get('DB_USER')
+    db_pass = os.environ.get('DB_PASS')
+    print(db_user)
     # Connect to the MySQL database
     mydb = mysql.connector.connect(
-        host="44.197.242.29",
-        user="latexdb",
-        password="Latexdb123!",
-        database="latexdb"
+        host=db_conn,
+        database=db_database,
+        user=db_user,
+        password=db_pass
     )
 
     # Define a Cursor

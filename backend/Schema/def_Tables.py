@@ -109,6 +109,7 @@ def defineTables():
         "s_Misc2        varchar(1024),"
         "n_Misc1        int,"
         "n_Misc2        int,"
+        "checkout_flag  int,"
         "PRIMARY KEY (DocId),"
         "UNIQUE (DocId),"
         "FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE CASCADE,"

@@ -55,16 +55,48 @@ Check http://localhost:56733 in the browser.
 ### [Backend]
 ```bash
 #On your AWS EC2 instance, run the following commands:
+sudo yum update
+sudo yum install mysql
+sudo yum install texlive
 
 cd /home/ec2-user
+
+#clone only the backend part leaving rest aside
+#from develop branch
+git clone –branch develop https://github.com/darapaneni/GL-IIITH-TechDocs.git temp 
+#from main branch
+git clone https://github.com/darapaneni/GL-IIITH-TechDocs.git temp 
+mkdir -p GL-IIITH-TechDocs
+mv temp/backend GL*
+mv temp/testdata GL*
 
 mkdir -p /techdocs_filesystem/log
 
 touch /techdocs_filesystem/log/filemanager.log
+#grant read write permission to the folder
+sudo chmod -R 777 /tech* 
 
-git clone https://github.com/prernawaghray/GL-TechDocs.git
+#update the requirements.txt with additional required libraries (e.g.,urllib==1.26.6,requests,pdflatex)
+#install the libraries
+cd GL-IIITH-TechDocs/backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
-cd GL-TechDocs/backend
+
+#update .env.local file with the RDS credentials, Razorpay ID and Key and JWT secret key
+#check database connectivity
+
+python3 DBConnect.py
+
+#update the def_Tables.py with changes in database (e.g., checkout_flag in Documents table)
+
+#create the backend tables in MySql instance
+
+cd Schema
+python3 def_Tables.py
+
+#update the orm_Tables with changes in database (e.g., checkout_flag in Documents table)
 
 #Update the docker-compose.yml file line#11 with below:
 /home/ec2-user/techdocs_filesystem:/tmp
