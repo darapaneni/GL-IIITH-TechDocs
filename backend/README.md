@@ -62,7 +62,10 @@ sudo yum install texlive
 cd /home/ec2-user
 
 #clone only the backend part leaving rest aside
+#from develop branch
 git clone –branch develop https://github.com/darapaneni/GL-IIITH-TechDocs.git temp 
+#from main branch
+git clone https://github.com/darapaneni/GL-IIITH-TechDocs.git temp 
 mkdir -p GL-IIITH-TechDocs
 mv temp/backend GL*
 mv temp/testdata GL*
