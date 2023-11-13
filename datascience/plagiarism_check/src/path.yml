@@ -1,0 +1,6 @@
+# config.yaml
+path:
+  stopwords_path : "./data/stopwords_en.txt"
+  incoming_pdf_path : "./data/latest"
+  repo_pdf_path : "./data/source_repo"
+  online_document_url : 'https://example.com/online_document'
