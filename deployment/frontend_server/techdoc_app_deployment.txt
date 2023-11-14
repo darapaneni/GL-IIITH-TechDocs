@@ -1,0 +1,338 @@
+PS C:\Users\HP\Downloads> ssh -i "frontendserver1.pem" ec2-user@ec2-3-238-195-0.compute-1.amazonaws.com
+
+[ec2-user@ip-172-31-0-106 frontend]$ git clone https://github.com/darapaneni/GL-IIITH-TechDocs.git
+
+
+[ec2-user@ip-172-31-0-106 ~]$ cd GL-IIITH-TechDocs/
+
+[ec2-user@ip-172-31-0-106 GL-IIITH-TechDocs]$ cd frontend
+
+[ec2-user@ip-172-31-0-106 frontend]$ sudo service docker start
+
+change the port and app name if its already in use:
+vi start.sh
+
+sudo bash start.sh
+
+[ec2-user@ip-172-31-0-106 frontend]$ sudo docker exec -it techdocs-frontend-2023 bash
+
+bash-5.1# npm install
+
+hostname -i (to run in the browser)
+
+exit
+
+[ec2-user@ip-172-31-0-106 frontend]$ sudo docker ps
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\HP> cd Downloads
+PS C:\Users\HP\Downloads> ssh -i "frontendserver1.pem" ec2-user@ec2-3-238-195-0.compute-1.amazonaws.com
+
+A newer release of "Amazon Linux" is available.
+  Version 2023.2.20231002:
+  Version 2023.2.20231011:
+Run "/usr/bin/dnf check-release-update" for full release and version update info
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Sun Oct  1 16:54:19 2023 from 49.207.216.215
+[ec2-user@ip-172-31-0-106 ~]$ git clone https://github.com/darapaneni/GL-IIITH-TechDocs.git
+Cloning into 'GL-IIITH-TechDocs'...
+remote: Enumerating objects: 223, done.
+remote: Counting objects: 100% (223/223), done.
+remote: Compressing objects: 100% (182/182), done.
+remote: Total 223 (delta 29), reused 188 (delta 14), pack-reused 0
+Receiving objects: 100% (223/223), 713.26 KiB | 19.28 MiB/s, done.
+Resolving deltas: 100% (29/29), done.
+[ec2-user@ip-172-31-0-106 ~]$ ls -lla
+total 16
+drwx------. 4 ec2-user ec2-user 120 Oct 14 08:45 .
+drwxr-xr-x. 3 root     root      22 Sep 30 10:36 ..
+-rw-------. 1 ec2-user ec2-user  55 Oct  1 19:11 .bash_history
+-rw-r--r--. 1 ec2-user ec2-user  18 Jan 28  2023 .bash_logout
+-rw-r--r--. 1 ec2-user ec2-user 141 Jan 28  2023 .bash_profile
+-rw-r--r--. 1 ec2-user ec2-user 492 Jan 28  2023 .bashrc
+drwx------. 2 ec2-user ec2-user  29 Sep 30 10:36 .ssh
+drwxr-xr-x. 6 ec2-user ec2-user  86 Oct 14 08:45 GL-IIITH-TechDocs
+[ec2-user@ip-172-31-0-106 ~]$ cd GL-IIITH-TechDocs/
+[ec2-user@ip-172-31-0-106 GL-IIITH-TechDocs]$ ls -la
+total 20
+drwxr-xr-x. 6 ec2-user ec2-user    86 Oct 14 08:45 .
+drwx------. 4 ec2-user ec2-user   120 Oct 14 08:45 ..
+drwxr-xr-x. 8 ec2-user ec2-user   163 Oct 14 08:45 .git
+drwxr-xr-x. 4 ec2-user ec2-user    53 Oct 14 08:45 Future_scope
+-rw-r--r--. 1 ec2-user ec2-user  2530 Oct 14 08:45 README.md
+drwxr-xr-x. 7 ec2-user ec2-user 16384 Oct 14 08:45 backend
+drwxr-xr-x. 3 ec2-user ec2-user   166 Oct 14 08:45 frontend
+[ec2-user@ip-172-31-0-106 GL-IIITH-TechDocs]$ cd frontend
+[ec2-user@ip-172-31-0-106 frontend]$ ls -la
+total 32
+drwxr-xr-x. 3 ec2-user ec2-user  166 Oct 14 08:45 .
+drwxr-xr-x. 6 ec2-user ec2-user   86 Oct 14 08:45 ..
+-rw-r--r--. 1 ec2-user ec2-user  353 Oct 14 08:45 Dockerfile
+-rw-r--r--. 1 ec2-user ec2-user 1881 Oct 14 08:45 README.md
+drwxr-xr-x. 4 ec2-user ec2-user   72 Oct 14 08:45 app
+-rw-r--r--. 1 ec2-user ec2-user  497 Oct 14 08:45 main.py
+-rw-r--r--. 1 ec2-user ec2-user   27 Oct 14 08:45 package-lock.json
+-rw-r--r--. 1 ec2-user ec2-user   29 Oct 14 08:45 requirements.txt
+-rw-r--r--. 1 ec2-user ec2-user  143 Oct 14 08:45 start.ps1
+-rw-r--r--. 1 ec2-user ec2-user  168 Oct 14 08:45 start.sh
+-rw-r--r--. 1 ec2-user ec2-user   81 Oct 14 08:45 uwsgi.ini
+[ec2-user@ip-172-31-0-106 frontend]$ sudo bash start.sh
+ERROR: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.
+See 'docker run --help'.
+Serving on :80
+[ec2-user@ip-172-31-0-106 frontend]$ sudo service docker start
+Redirecting to /bin/systemctl start docker.service
+[+] Building 37.7s (13/13) FINISHED                                                                      docker:default
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 451B                                                                               0.0s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load metadata for docker.io/tiangolo/uwsgi-nginx-flask:python3.8-alpine                             0.4s
+ => [1/8] FROM docker.io/tiangolo/uwsgi-nginx-flask:python3.8-alpine@sha256:ce1546cc67864ed336b2db6c2427f86526843  5.2s
+ => => resolve docker.io/tiangolo/uwsgi-nginx-flask:python3.8-alpine@sha256:ce1546cc67864ed336b2db6c2427f86526843  0.0s
+ => => sha256:b8988a686bbdf503e1884e129cd15b1c21e9b99679011c8b181fcc33ac850f7b 281.79kB / 281.79kB                 0.1s
+ => => sha256:ce1546cc67864ed336b2db6c2427f8652684339ae6d1fe75de14df7f8321f85f 5.74kB / 5.74kB                     0.0s
+ => => sha256:7105d0816cb1190a128cb7bc85dcea3022cd9930377ad1eb7425c2d05190b42b 14.08kB / 14.08kB                   0.0s
+ => => sha256:2d2ab718c41985f2aa8a1c6c25005b8ab119cd98a6f8a6699d102c6efcc2b6e3 11.23MB / 11.23MB                   0.5s
+ => => sha256:5758d4e389a3f662e94a85fb76143dbe338b64f8d2a65f45536a9663b05305ad 2.82MB / 2.82MB                     0.1s
+ => => extracting sha256:5758d4e389a3f662e94a85fb76143dbe338b64f8d2a65f45536a9663b05305ad                          0.2s
+ => => sha256:af7a7515e8bd131fbdc0ab8c14301cafc9abfe3288ffe2764c02715bf36563db 2.35MB / 2.35MB                     0.4s
+ => => sha256:87032375e817032d5e56d5d6cc8774883bf55f8321306de943d6ffef175a1a2f 230B / 230B                         0.2s
+ => => sha256:6cb411aa8ad2b25584c603a4d65f0792e6232be299e516765b229c6b89a93cfa 1.46kB / 1.46kB                     0.3s
+ => => extracting sha256:b8988a686bbdf503e1884e129cd15b1c21e9b99679011c8b181fcc33ac850f7b                          0.2s
+ => => sha256:e8639c2407509ca2315c87fc9de9a1ab4b32cc8571f113ef486f24a750585d2e 6.68MB / 6.68MB                     0.9s
+ => => sha256:a4820a23efe19fc922f3bc2986b1632275d0347dbf72a0976dfd9b0b28712a38 14.61MB / 14.61MB                   1.0s
+ => => sha256:94df5cb2f0e6831180e98392b90af12cf449e0ece92217825a2413996c6d2bee 377B / 377B                         0.7s
+ => => extracting sha256:2d2ab718c41985f2aa8a1c6c25005b8ab119cd98a6f8a6699d102c6efcc2b6e3                          1.0s
+ => => sha256:1761526b7c26cd8a011824598b078471e2b00b5a4e23424ee76630e7f6364894 2.08MB / 2.08MB                     1.0s
+ => => sha256:311317774f6d64f515de4af86f9a8dc365c3afa633bb7539fbb8d8c5a1df98de 439B / 439B                         1.0s
+ => => sha256:74d214e1f086e8b99aa163be2171857a11cc18df66afaf2702ac0b882af0008a 465B / 465B                         1.0s
+ => => sha256:3e8297302c97c9dc315a18699f7f5b039c8288cc77ff5ebc4ad98563e1a9b9f7 460B / 460B                         1.1s
+ => => sha256:952645d780399ac2a0cc8435b80a930ab54fc4ebb3b86d384b2aca03c6f27683 1.18kB / 1.18kB                     1.1s
+ => => sha256:d378d43c4a27f982fbf1af1862e8eabc22805cdb22c100b1aca5daeb2d61770d 321B / 321B                         1.1s
+ => => sha256:c5dc5019f217a01bc9c2d21790e22fa6f2a7cf59d05a9d503efa76450b1c9760 322B / 322B                         1.1s
+ => => sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B                           1.2s
+ => => sha256:358b600bb2fe85cdac3c87a00f6835bb0b3217f618cec063d31f728266daa3f8 1.18kB / 1.18kB                     1.2s
+ => => sha256:4140b6a1791bc89000263f75c72f66cfae9e05dfc0930e04a4756888b713dffc 565B / 565B                         1.3s
+ => => sha256:83b9e9785ff60e5886e9857376a506ed1a02418a43219517a547e56e8cad9903 1.21kB / 1.21kB                     1.4s
+ => => sha256:072790e7d9ea7327291f54e778430867c97c8f89baa30745a777b449d199e5a8 159B / 159B                         1.2s
+ => => sha256:11b2f2ed5a1f186136bc3541c1e4ed34516d6eb93b31d94bca60ab980f5216ed 3.51MB / 3.51MB                     1.8s
+ => => sha256:cee7c73971bccdb2182dea4cd02d04699b5ccf9db22f38e0c32aba526efd6fdc 579B / 579B                         1.4s
+ => => sha256:49ef488dc592813dc3e5ae7acdc3b9216a7b97a792ed60d59ec27d7d33e08e13 770B / 770B                         1.5s
+ => => sha256:497ad5f155906530547e1d53448e12b207f599ea4cc3586191f999fd7925975b 770B / 770B                         1.5s
+ => => extracting sha256:87032375e817032d5e56d5d6cc8774883bf55f8321306de943d6ffef175a1a2f                          0.0s
+ => => extracting sha256:af7a7515e8bd131fbdc0ab8c14301cafc9abfe3288ffe2764c02715bf36563db                          0.3s
+ => => extracting sha256:6cb411aa8ad2b25584c603a4d65f0792e6232be299e516765b229c6b89a93cfa                          0.0s
+ => => extracting sha256:e8639c2407509ca2315c87fc9de9a1ab4b32cc8571f113ef486f24a750585d2e                          0.5s
+ => => extracting sha256:a4820a23efe19fc922f3bc2986b1632275d0347dbf72a0976dfd9b0b28712a38                          1.2s
+ => => extracting sha256:94df5cb2f0e6831180e98392b90af12cf449e0ece92217825a2413996c6d2bee                          0.0s
+ => => extracting sha256:1761526b7c26cd8a011824598b078471e2b00b5a4e23424ee76630e7f6364894                          0.2s
+ => => extracting sha256:311317774f6d64f515de4af86f9a8dc365c3afa633bb7539fbb8d8c5a1df98de                          0.0s
+ => => extracting sha256:74d214e1f086e8b99aa163be2171857a11cc18df66afaf2702ac0b882af0008a                          0.0s
+ => => extracting sha256:3e8297302c97c9dc315a18699f7f5b039c8288cc77ff5ebc4ad98563e1a9b9f7                          0.0s
+ => => extracting sha256:d378d43c4a27f982fbf1af1862e8eabc22805cdb22c100b1aca5daeb2d61770d                          0.0s
+ => => extracting sha256:c5dc5019f217a01bc9c2d21790e22fa6f2a7cf59d05a9d503efa76450b1c9760                          0.0s
+ => => extracting sha256:952645d780399ac2a0cc8435b80a930ab54fc4ebb3b86d384b2aca03c6f27683                          0.0s
+ => => extracting sha256:358b600bb2fe85cdac3c87a00f6835bb0b3217f618cec063d31f728266daa3f8                          0.0s
+ => => extracting sha256:4140b6a1791bc89000263f75c72f66cfae9e05dfc0930e04a4756888b713dffc                          0.0s
+ => => extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1                          0.0s
+ => => extracting sha256:072790e7d9ea7327291f54e778430867c97c8f89baa30745a777b449d199e5a8                          0.0s
+ => => extracting sha256:11b2f2ed5a1f186136bc3541c1e4ed34516d6eb93b31d94bca60ab980f5216ed                          0.4s
+ => => extracting sha256:cee7c73971bccdb2182dea4cd02d04699b5ccf9db22f38e0c32aba526efd6fdc                          0.0s
+ => => extracting sha256:83b9e9785ff60e5886e9857376a506ed1a02418a43219517a547e56e8cad9903                          0.0s
+ => => extracting sha256:49ef488dc592813dc3e5ae7acdc3b9216a7b97a792ed60d59ec27d7d33e08e13                          0.0s
+ => => extracting sha256:497ad5f155906530547e1d53448e12b207f599ea4cc3586191f999fd7925975b                          0.0s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 131B                                                                                  0.0s
+ => [2/8] RUN apk --update add bash nano                                                                           1.0s
+ => [3/8] RUN apk add --update npm                                                                                 2.4s
+ => [4/8] RUN apk update && apk add gcc musl-dev libffi-dev                                                        2.8s
+ => [5/8] COPY ./requirements.txt /var/www/requirements.txt                                                        0.0s
+ => [6/8] RUN pip install -r /var/www/requirements.txt                                                            19.1s
+ => [7/8] WORKDIR /app/app/static/js                                                                               0.1s
+ => [8/8] RUN npm install                                                                                          2.1s
+ => exporting to image                                                                                             4.4s
+ => => exporting layers                                                                                            4.4s
+ => => writing image sha256:b978b70560b9d29bf7542ccf81a8870e3ea5c3a6f7fdabb89651377659a9ae63                       0.0s
+ => => naming to docker.io/library/techdocs-frontend                                                               0.0s
+6fa8e7f710a0a6c48f5194a5394ca34eaa44b19b8c6275ae667dbffce33f49c5
+docker: Error response from daemon: driver failed programming external connectivity on endpoint techdocs-frontend (a59cabb85be50f41897654fdebdaf8ceeb99a1957ad4c1ca9b49cedeebb02776): Error starting userland proxy: listen tcp4 0.0.0.0:80: bind: address already in use.
+Serving on :80
+[ec2-user@ip-172-31-0-106 frontend]$ vi start.sh
+
+[ec2-user@ip-172-31-0-106 frontend]$ sudo bash start.sh
+[+] Building 0.2s (13/13) FINISHED                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                       0.0s
+ => => transferring dockerfile: 451B                                                                                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                                                                          0.0s
+ => => transferring context: 2B                                                                                                                                                            0.0s
+ => [internal] load metadata for docker.io/tiangolo/uwsgi-nginx-flask:python3.8-alpine                                                                                                     0.1s
+ => [1/8] FROM docker.io/tiangolo/uwsgi-nginx-flask:python3.8-alpine@sha256:ce1546cc67864ed336b2db6c2427f8652684339ae6d1fe75de14df7f8321f85f                                               0.0s
+ => [internal] load build context                                                                                                                                                          0.0s
+ => => transferring context: 96B                                                                                                                                                           0.0s
+ => CACHED [2/8] RUN apk --update add bash nano                                                                                                                                            0.0s
+ => CACHED [3/8] RUN apk add --update npm                                                                                                                                                  0.0s
+ => CACHED [4/8] RUN apk update && apk add gcc musl-dev libffi-dev                                                                                                                         0.0s
+ => CACHED [5/8] COPY ./requirements.txt /var/www/requirements.txt                                                                                                                         0.0s
+ => CACHED [6/8] RUN pip install -r /var/www/requirements.txt                                                                                                                              0.0s
+ => CACHED [7/8] WORKDIR /app/app/static/js                                                                                                                                                0.0s
+ => CACHED [8/8] RUN npm install                                                                                                                                                           0.0s
+ => exporting to image                                                                                                                                                                     0.0s
+ => => exporting layers                                                                                                                                                                    0.0s
+ => => writing image sha256:b978b70560b9d29bf7542ccf81a8870e3ea5c3a6f7fdabb89651377659a9ae63                                                                                               0.0s
+ => => naming to docker.io/library/techdocs-frontend                                                                                                                                       0.0s
+docker: Error response from daemon: Conflict. The container name "/techdocs-frontend" is already in use by container "6fa8e7f710a0a6c48f5194a5394ca34eaa44b19b8c6275ae667dbffce33f49c5". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+Serving on :8080
+[ec2-user@ip-172-31-0-106 frontend]$ vi start.sh
+[ec2-user@ip-172-31-0-106 frontend]$ sudo bash start.sh
+[+] Building 0.3s (13/13) FINISHED                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                       0.0s
+ => => transferring dockerfile: 451B                                                                                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                                                                          0.0s
+ => => transferring context: 2B                                                                                                                                                            0.0s
+ => [internal] load metadata for docker.io/tiangolo/uwsgi-nginx-flask:python3.8-alpine                                                                                                     0.2s
+ => [1/8] FROM docker.io/tiangolo/uwsgi-nginx-flask:python3.8-alpine@sha256:ce1546cc67864ed336b2db6c2427f8652684339ae6d1fe75de14df7f8321f85f                                               0.0s
+ => [internal] load build context                                                                                                                                                          0.0s
+ => => transferring context: 96B                                                                                                                                                           0.0s
+ => CACHED [2/8] RUN apk --update add bash nano                                                                                                                                            0.0s
+ => CACHED [3/8] RUN apk add --update npm                                                                                                                                                  0.0s
+ => CACHED [4/8] RUN apk update && apk add gcc musl-dev libffi-dev                                                                                                                         0.0s
+ => CACHED [5/8] COPY ./requirements.txt /var/www/requirements.txt                                                                                                                         0.0s
+ => CACHED [6/8] RUN pip install -r /var/www/requirements.txt                                                                                                                              0.0s
+ => CACHED [7/8] WORKDIR /app/app/static/js                                                                                                                                                0.0s
+ => CACHED [8/8] RUN npm install                                                                                                                                                           0.0s
+ => exporting to image                                                                                                                                                                     0.0s
+ => => exporting layers                                                                                                                                                                    0.0s
+ => => writing image sha256:b978b70560b9d29bf7542ccf81a8870e3ea5c3a6f7fdabb89651377659a9ae63                                                                                               0.0s
+ => => naming to docker.io/library/techdocs-frontend-2023                                                                                                                                  0.0s
+4b5ebc8c143522e858272762c08b5a9dc45dfb4c22142c8f0baf5e6e35d6f8b9
+Serving on :8080
+[ec2-user@ip-172-31-0-106 frontend]$ docker exec -it techdocs-frontend-2023 bash
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/techdocs-frontend-2023/json": dial unix /var/run/docker.sock: connect: permission denied
+[ec2-user@ip-172-31-0-106 frontend]$ sudo docker exec -it techdocs-frontend-2023 bash
+bash-5.1#
+bash-5.1# npn install
+bash: npn: command not found
+bash-5.1# npm install
+npm WARN js No description
+npm WARN js No repository field.
+npm WARN js No license field.
+
+added 105 packages from 68 contributors and audited 105 packages in 6.127s
+
+47 packages are looking for funding
+  run `npm fund` for details
+
+found 1 moderate severity vulnerability
+  run `npm audit fix` to fix them, or `npm audit` for details
+bash-5.1# ipconfig
+bash: ipconfig: command not found
+bash-5.1# hostname -i
+172.17.0.2
+bash-5.1# docker ps
+bash: docker: command not found
+bash-5.1# sudo docker ps
+bash: sudo: command not found
+bash-5.1# ^C
+bash-5.1# exit
+exit
+[ec2-user@ip-172-31-0-106 frontend]$ sudo docker ps
+CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                                            NAMES
+4b5ebc8c1435   techdocs-frontend-2023   "/entrypoint.sh /sta…"   7 minutes ago   Up 7 minutes   443/tcp, 0.0.0.0:8080->80/tcp, :::8080->80/tcp   techdocs-frontend-2023
+[ec2-user@ip-172-31-0-106 frontend]$ client_loop: send disconnect: Connection reset
+PS C:\Users\HP\Downloads> ssh -i "frontendserver1.pem" ec2-user@ec2-3-238-195-0.compute-1.amazonaws.com
+
+A newer release of "Amazon Linux" is available.
+  Version 2023.2.20231002:
+  Version 2023.2.20231011:
+Run "/usr/bin/dnf check-release-update" for full release and version update info
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Sat Oct 14 08:45:25 2023 from 49.207.216.43
+[ec2-user@ip-172-31-0-106 ~]$ sudo docker ps -a
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                            NAMES
+4b5ebc8c1435   techdocs-frontend-2023   "/entrypoint.sh /sta…"   16 minutes ago   Up 16 minutes   443/tcp, 0.0.0.0:8080->80/tcp, :::8080->80/tcp   techdocs-frontend-2023
+6fa8e7f710a0   techdocs-frontend        "/entrypoint.sh /sta…"   21 minutes ago   Created                                                          techdocs-frontend
+[ec2-user@ip-172-31-0-106 ~]$ hostname -i
+172.31.0.106
+[ec2-user@ip-172-31-0-106 ~]$ client_loop: send disconnect: Connection reset
+PS C:\Users\HP\Downloads> ssh -i "frontendserver1.pem" ec2-user@ec2-3-238-195-0.compute-1.amazonaws.com
+
+A newer release of "Amazon Linux" is available.
+  Version 2023.2.20231002:
+  Version 2023.2.20231011:
+Run "/usr/bin/dnf check-release-update" for full release and version update info
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Sat Oct 14 09:09:48 2023 from 49.207.216.43
+[ec2-user@ip-172-31-0-106 ~]$ hostname -i
+172.31.0.106
+[ec2-user@ip-172-31-0-106 ~]$ client_loop: send disconnect: Connection reset
+PS C:\Users\HP\Downloads>
+
+------------------------------------------------------------------------------------------------------
+Create a new security group with an inbound rule "Custom TCP" giving permission to ports: 0-65535 and CIDR of 0.0.0.0/0. Attach this security group to your EC2 instance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
