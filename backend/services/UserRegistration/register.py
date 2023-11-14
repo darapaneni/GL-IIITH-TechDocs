@@ -29,8 +29,13 @@ def register():
         password=content['password']
         firstname=content["FirstName"]
         lastname=content["LastName"]
+       ## userName=request.form.get('email')
+       ## password=request.form.get('password')
+       ## firstname=request.form.get('FirstName')
+       ## lastname=request.form.get('LastName')
         IsAdmin=False
-        loginType=content['loginType']
+        loginType=content["loginType"]
+       ## loginType=request.form.get('loginType')
         secure_password = bcrypt.generate_password_hash(password) 
         session = session_factory()
         sql_stmt = (select(User.UserId, User.IsAdmin, User.UserName ).where (User.UserName == userName))

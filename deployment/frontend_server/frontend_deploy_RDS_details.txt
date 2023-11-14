@@ -1,0 +1,41 @@
+secuirty group:
+1. secuirty group name = frontend-sg
+2. vpc-0d82d435406002561
+
+Instance1:
+1. name and tags = frontendserver1
+2. key and pair name = frontendserver1
+user data = 
+#!/bin/bash
+yum update -y
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+IP_ADDR=$(curl https://checkip.amazonaws.com/)
+echo "Server instance with IP $IP_ADDR" > /var/www/html/index.html
+
+Instance2:
+1. name and tags = frontendserver2
+2. key and pair name = frontendserver2
+user data = 
+#!/bin/bash
+yum update -y
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+IP_ADDR=$(curl https://checkip.amazonaws.com/)
+echo "Server instance with IP $IP_ADDR" > /var/www/html/index.html
+
+Target group:
+target grpup name = tg-frontendserver
+health check path = /index.html
+Healthy threshold = 2
+
+Loadbalancer:
+loadbalcner name = lb-frontendserver
+
+mysql-rds:
+securitygroup - mysql-rds-sg
+dbinstance - mysql-rds-techdocs
+master username - rootuser
+master password - admin123

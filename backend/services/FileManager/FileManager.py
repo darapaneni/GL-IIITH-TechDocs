@@ -24,6 +24,8 @@ from ..UserAuthentication.JWTAuthentication import authentication
 from ..DocumentVersionManager.DocumentVersionManager import VersionManage
 from ..UserHistoryManager import *
 from ..Permissions.permissions import get_user_permissions
+from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 # Suppress warnings
 warnings.filterwarnings("ignore")
@@ -33,6 +35,13 @@ fileManagerBlueprint = Blueprint('fileManagerBlueprint', __name__)
 data_path = ProdConfig.DIR_ROOT + ProdConfig.DIR_DATA 
 log_path = ProdConfig.DIR_ROOT + ProdConfig.DIR_LOG
 logging.basicConfig(filename=log_path)
+
+ALLOWED_EXTENSIONS = {'tex'}
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # @fileManagerBlueprint.before_request
 # def before_request_func():
@@ -90,6 +99,209 @@ class FileManage:
 
         cls.v_filename = filename
         cls.v_filepath = filepath
+'''
+# API to upload a file
+'''
+ALLOWED_EXTENSIONS = {'tex'}
+
+@fileManagerBlueprint.route('/upload/', methods = ['GET', 'POST'])
+def upload_file():
+    userid      = 0
+    docid       = 0
+    docname     = ''
+    doctext     = ''
+    ver         = 0
+    newfilepath = ''
+    refdocid    = 0
+    reffilepath = ''
+    data_out    = {}
+    mess_out    = 0
+    username    = ''
+    # data_path, log_path = before_request_func()
+    data_path = current_app.config["DIR_ROOT"] + current_app.config["DIR_DATA"] 
+    current_app.logger.info("File Upload initiated")
+
+    if(request.method == 'POST'):
+        # request data
+        userid   = request.form['userId']
+        file_directory = data_path + '/' + str(userid)
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            docname = secure_filename(file.filename)
+            filename = secure_filename(file.filename)
+            if not os.path.exists(file_directory):
+                print(file_directory)
+                os.makedirs(file_directory)
+       ##     file.save(os.path.join(file_directory, docname))
+
+
+        isupload = True
+        refdocid = 0
+        istrash = 0
+        
+        docname_only = docname.split(".")[0]
+        print(docname)
+        print(docname_only)
+        session  = session_factory()
+        file_obj = FileManage()
+        ver_obj  = VersionManage()
+        
+
+        # Save data into database
+        try:
+            # new file
+            if ((docid == 0) or (docid == '')):
+                ver = 1
+            else:
+                raise Exception("Wrong service called. Create file is for new file only!")
+            
+            # validate if User and document combination exists. Error out if so
+            sql_stmt = select(Document.DocId).where(Document.DocName == docname_only, Document.UserId == userid)
+            sql_result = session.execute(sql_stmt)
+            noofrecords = len(sql_result.all())
+            print(noofrecords)
+            if (noofrecords > 0):
+                raise Exception("filename already exists")
+            
+            # dry run testing - request from front end people to send out username instead of userid
+            sql_stmt = (select(User.UserName).where(User.UserId == userid))
+            sql_result = session.execute(sql_stmt)
+            # there is always only 1 row
+            for row in sql_result:
+                username = row[0]
+            
+            # Method to create a new file path - object will store the values of filename, file path
+           ## ver_obj.createNewVersionFile(userid, docname_only, ver, '')
+            file_path = file_directory + '/' + docname
+           ## newfilepath = ver_obj.v_file_path
+            newfilepath = file_path
+           ## docname     = ver_obj.v_file_name
+            docname  = docname_only
+            # create the file
+            ## open(newfilepath, 'a').close()
+            file.save(os.path.join(file_directory, filename))
+            doc_entry = Document(userid, docname, newfilepath, datetime.today(), ver, isupload, istrash)
+            session.add(doc_entry)
+            session.flush()
+            docid_out = doc_entry.DocId
+            session.commit()
+            # entry into permissions table
+            perm_entry = Permission(docid_out, userid, 'WRASD') #(W)rite/(R)ead/(A)nalytics/(S)hare/(D)elete
+            session.add(perm_entry)
+            session.flush()
+            session.commit()
+            # entry into DocumentHistory table
+            dochist_entry = DocumentHistory(userid, docid_out, datetime.today(), docname, newfilepath, ver)
+            session.add(dochist_entry)
+            session.flush()
+            session.commit()
+            # entry into UserHistory table
+            userhist_entry = UserHistory(userid, docid_out, datetime.today(), docname, 'Create')
+            session.add(userhist_entry)
+            session.flush()
+            session.commit()
+            
+            # if there is a reference document given, copy the contents to the new file
+            if (refdocid != 0):
+                sql_stmt = select(Document.FilePath).where(Document.DocId == refdocid)
+                sql_result = session.execute(sql_stmt)
+                # there is always only 1 row
+                for row in sql_result:
+                    reffilepath = row.FilePath
+                
+                with open(reffilepath, 'r') as firstfile, open(newfilepath, 'a') as secondfile:
+                    for line in firstfile:
+                        secondfile.write(line)
+                
+                with open(reffilepath, 'r') as firstfile:
+                    doctext = firstfile.read() 
+            # Write data if given from the user
+            elif (doctext != ''):
+                file_obj.writeToFile(newfilepath, doctext)
+            
+            session.close()
+            # building output data
+            data_out = {"UserId":username, "DocId":docid_out, "DocName":docname, "DocText":doctext, "Filepath": newfilepath}
+            mess_out = 200
+        except Exception as err:
+            data_out = {"message":str(err)}
+            mess_out = 500
+            return "Failed to upload the file! "+str(err)
+            current_app.logger.exception("Failed to upload the file! "+str(err))
+        else:
+            return "File uploaded successfully"
+    current_app.logger.info("File uploaded")
+    # return the message and data string as response
+    # return make_response(jsonify(data_out), mess_out)
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+       <table>
+           <tr>
+              <td>Customer Id</td>
+              <td>: <input type = 'text' name = 'userId'/></td>
+           </tr>
+           <tr>
+              <td>Filename</td>
+              <td>: <input type=file name=file></td>
+           </tr>
+           <p></p>
+       </table>    
+       <p><input type=submit value=upload></p>
+    </form>
+    '''
+@fileManagerBlueprint.route('/download/', methods = ['GET', 'POST'])
+def download_file():
+    data_path = current_app.config["DIR_ROOT"] + current_app.config["DIR_DATA"]
+    current_app.logger.info("File Download initiated") 
+    if(request.method == 'POST'):
+        userid   = request.form['userId']
+        filename = request.form['fileName']
+        file_directory = data_path + '/' + str(userid)
+        filepath = file_directory + '/' + filename
+        if(filepath):
+            print('filepath:'+filepath)
+            file_exists = os.path.exists(filepath)
+            if file_exists:
+                print('file exists')
+                return send_from_directory(file_directory, filename)
+                current_app.logger.exception("file exists")
+            else:
+                return "file does not exist" 
+                current_app.logger.exception("file does not exist")
+        else:
+            return "Please enter the file name" 
+            current_app.logger.exception("filename not entered")
+    return '''
+    <!doctype html>
+    <title>Download File</title>
+    <h1>Download File from your directory</h1>
+    <form method=post enctype=multipart/form-data>
+       <table>
+           <tr>
+              <td>Customer Id</td>
+              <td>: <input type = 'text' name = 'userId'/></td>
+           </tr>
+           <tr>
+              <td>Filename</td>
+              <td>: <input type = 'text' name= 'fileName'/></td>
+           </tr>
+           <p></p>
+       </table>    
+       <p><input type=submit value=download></p>
+    </form>
+    '''
+      
         
 '''
 # API to create a new file either empty or with data given
@@ -251,12 +463,13 @@ def file_Modify(user_id):
         newfilepath = ''
         ver         = 0
         username    = ''
+        checkout_flag = 1
         
         # open db connection
         session  = session_factory()
         file_obj = FileManage()
         ver_obj  = VersionManage()
-        
+        print("reached here!")
         try:
             if ((docid == 0) or (docid == '')):
                 raise Exception('Document reference id not given. Cannot process!')
@@ -264,8 +477,9 @@ def file_Modify(user_id):
             # check if the document exists
             sql_stmt = select(Document.DocId).where(Document.DocId == docid)
             sql_result = session.execute(sql_stmt)
+            print("sql query : "+ str(sql_stmt))
             noofrecords = len(sql_result.all())
-            
+            print("no. of records : "+ str(noofrecords))
             # DocId not found so create a new file & save - mostly save operation
             if (noofrecords == 0):
                 error_desc = 'Document cannot be retrieved with the given DocId: '+str(docid)+'. Cannot process!'
@@ -293,38 +507,56 @@ def file_Modify(user_id):
                 # User has write permission
                 if 'W' in userperm:
                     # get and create a new version for the document
-                    sql_stmt = (select(Document.Version).where(Document.DocId == docid))
+                    #sql_stmt = (select(Document.Version).where(Document.DocId == docid))
+                    sql_stmt = (select(Document.checkout_flag).where(Document.DocId == docid, Document.checkout_flag == checkout_flag))
                     sql_result = session.execute(sql_stmt)
-                    # there is always only 1 row
-                    for row in sql_result:
-                        ver_row = row[0]
-                        file_obj.createNewVersion(ver_row)
-                        ver = file_obj.v_version
-                    # create a new file with new version
-                    ver_obj.createNewVersionFile(userid, docname, ver, '')
-                    newfilepath = ver_obj.v_file_path
-                    docname     = ver_obj.v_file_name
+                    print("sql query : "+ str(sql_stmt))
+                    noofrecs = len(sql_result.all())
+                    print("no. of records of a checked out file: "+ str(noofrecs))
+                    if (noofrecs == 0):
+                        # get and create a new version for the document
+                        sql_stmt = (select(Document.Version).where(Document.DocId == docid))
+                        sql_result = session.execute(sql_stmt)
+                        # there is always only 1 row
+                        for row in sql_result:
+                            ver_row = row[0]
+                            file_obj.createNewVersion(ver_row)
+                            ver = file_obj.v_version
+                        # create a new file with new version
+                        ver_obj.createNewVersionFile(userid, docname, ver, '')
+                        newfilepath = ver_obj.v_file_path
+                        docname     = ver_obj.v_file_name
                     
-                    # dry run testing - request from front end people to send out username instead of userid
-                    sql_stmt = (select(User.UserName).where(User.UserId == userid))
-                    sql_result = session.execute(sql_stmt)
-                    # there is always only 1 row
-                    for row in sql_result:
-                        username = row[0]
+                        # dry run testing - request from front end people to send out username instead of userid
+                        sql_stmt = (select(User.UserName).where(User.UserId == userid))
+                        sql_result = session.execute(sql_stmt)
+                        # there is always only 1 row
+                        for row in sql_result:
+                            username = row[0]
                     
-                    # UPDATES
-                    mod_date = datetime.today()
-                    # update Documents table with the latest version
-                    sql_stmt = update(Document)\
-                        .where(Document.DocId == docid)\
-                        .values({Document.FilePath:newfilepath, Document.Version:ver, Document.ModifiedDate:mod_date, Document.ModifiedBy:username})
-                    session.execute(sql_stmt)
-                    session.commit()
+                        # UPDATES
+                        mod_date = datetime.today()
+                        # update Documents table with the latest version and checkout flag
+                        sql_stmt = update(Document)\
+                            .where(Document.DocId == docid)\
+                            .values({Document.FilePath:newfilepath, Document.Version:ver, Document.ModifiedDate:mod_date, Document.checkout_flag:checkout_flag})
+                        session.execute(sql_stmt)
+                        session.commit()
+                    else:
+                        error_desc = 'Document cannot be modified for given DocId: '+str(docid)+'. it is being updated by another user. Please wait!'
+                        raise Exception(error_desc)                     
                 else:
                     raise Exception("User does not have access to modify!")
             
             # update the content to this file
             file_obj.writeToFile(newfilepath, doctext)
+            #update the checkout flag
+            checkout_flag = 0
+            sql_stmt = update(Document)\
+                .where(Document.DocId == docid)\
+                .values({Document.FilePath:newfilepath, Document.Version:ver, Document.ModifiedDate:mod_date, Document.checkout_flag:checkout_flag})
+            session.execute(sql_stmt)
+            session.commit()
             # insert new entry into the Document History table
             dochist_entry = DocumentHistory(userid, docid, datetime.today(), docname, newfilepath, ver)
             session.add(dochist_entry)

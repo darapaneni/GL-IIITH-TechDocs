@@ -28,7 +28,9 @@ from services.ForgotPassword.mail import mail_bp
 from services.DocumentVersionManager.DocumentVersionManager import documentVersionManagerBlueprint
 from services.UserHistoryManager.UserHistoryManager import userHistoryManagerBlueprint
 from services.RazorpayIntegration.razorPay import razorPayBlueprint
+from services.RazorpayIntegration.razorpayDB import *
 from services.Permissions.permissions import permissions_bp
+from services.ConvertLatexToPdf.ConvertLatexToPdf import convertLatexToPdfBlueprint
 # For logging 
 from sentry_sdk.integrations.flask import FlaskIntegration
 
@@ -50,7 +52,7 @@ sentry_sdk.init(
     # release="myapp@1.0.0",
 )
 
-app= Flask(__name__)
+app= Flask(__name__, template_folder='/home/ec2-user/GL-IIITH-TechDocs/backend/services/RazorpayIntegration/templates')
 CORS(app, resources={r"/*":{"origins":"*"}})
 app.config.from_object('config.ProdConfig')
 
@@ -68,6 +70,7 @@ app.register_blueprint(changepassword_bp)
 app.register_blueprint(mail_bp)
 app.register_blueprint(razorPayBlueprint)
 app.register_blueprint(permissions_bp)
+app.register_blueprint(convertLatexToPdfBlueprint)
 
 # This function get the hostname and IP deatils of server, required for microservices
 def fetchDetails():

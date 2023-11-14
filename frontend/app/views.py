@@ -1,7 +1,49 @@
+import importlib
+from app import app
 from flask import render_template, request, url_for,session 
 from flask import make_response, redirect
 from app import app
 
+## 4xx and 5xx Error handling
+@app.errorhandler(400)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/400.html')
+
+@app.errorhandler(401)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/401.html')
+
+@app.errorhandler(403)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/403.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/404.html')
+
+@app.errorhandler(500)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/500.html')
+
+@app.errorhandler(501)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/501.html')
+
+@app.errorhandler(502)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/502.html')
+
+@app.errorhandler(504)
+def page_not_found(e):
+   print(e)
+   return render_template('error-page/504.html')
 
 
 '''Login Authorization Wrapper'''
@@ -25,7 +67,9 @@ def login_required(f):
 def home():
    return render_template('home-page/home.html')
 
-
+@app.route('/trash')
+def trash():
+   return render_template('trash/trash.html')
 
 @app.route('/register')
 def register():
@@ -56,9 +100,14 @@ def logout():
 
 
 @app.route('/dashboard')
-@login_required
+# @login_required
 def dashboard():
    return render_template('user-dashboard/dashboard.html')
+
+@app.route('/share')
+# @login_required
+def share():
+   return render_template('Share/share.html')
 
 @app.route('/registration')
 def registration():
@@ -143,3 +192,18 @@ def user_plans():
 # @login_required
 def latexHistory():
    return render_template('latex-history/history.html')
+
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
+if __name__ == '_main_':
+   app.run(debug=True, host="0.0.0.0", port=56733)

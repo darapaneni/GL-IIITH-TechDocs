@@ -1,0 +1,10 @@
+torch
+flask
+flasgger
+errant
+spacy
+transformers
+# python -m spacy download en
+tensorflow
+# jax
+# https://github.com/PrithivirajDamodaran/Gramformer.git # disable gramformer.py if you are installing it

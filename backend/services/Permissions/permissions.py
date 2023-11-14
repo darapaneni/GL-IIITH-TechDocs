@@ -16,7 +16,7 @@ from DBConnect import session_factory
 from orm_Tables import Permission
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-env = os.path.join(basedir,'../.env.local')
+env = os.path.join(basedir,'../../.env.local')
 if os.path.exists(env):
     load_dotenv(env)
 url = os.environ.get('DB_URL')
@@ -41,23 +41,33 @@ def set_permissions(user_id):
         get_doc_id methods.This function helps to set the permissions by giving doc_id and share_user_id
         as inputs for the set permission methods.
     '''
+    session = session_factory()
     content = request.get_json(silent=True)
     share_email = content['share_email']
     doc_id = content['DocId']
     permission_type = content['permission_type']
-    share_user_id = get_user_id(share_email)
-    share_user_id = share_user_id
-    sql_query_1 = text("""SELECT PermissionId FROM Permissions WHERE UserId=:UID and DocId=:DID""")
-    param_1 = {"UID": share_user_id, "DID": doc_id}
-    permission_id = connect.execute(sql_query_1, **param_1).first()
+    print(share_email)
+    print(doc_id)
+    print(permission_type)
+    ##share_user_id = get_user_id(share_email)
+    share_user_id = user_id
+    print(share_user_id)
+   ## sql_query_1 = text("""SELECT PermissionId FROM Permissions WHERE UserId=:UID and DocId=:DID""")
+   ## param_1 = {"UID": share_user_id, "DID": doc_id}
+   ## permission_id = connect.execute(sql_query_1, **param_1).first()
+    sql_stmt = (select (Permission.PermissionId).where(Permission.UserId ==share_user_id ,Permission.DocId == doc_id))
+    permission_id = session.execute(sql_stmt).first()[0]
+    print(permission_id)
     if permission_type != "remove":
         if permission_id is None:
             sql_query_2 = text("""INSERT into Permissions(UserId,DocId) values (:UID,:DID)""")
             connect.execute(sql_query_2,**param_1)
         
     try: 
-        
+        user_permission = get_user_permissions(user_id, doc_id)
+        print(user_permission)
         if 'S' in get_user_permissions(user_id, doc_id):
+            print(permission_type)
             if permission_type == "edit":
                 # edit_permissions(share_user_id, doc_id)
                 sql_stmt = (update(Permission).where(Permission.UserId == share_user_id, Permission.DocId == doc_id).values({Permission.UserPermissions: "RWD"}))
@@ -90,6 +100,7 @@ def get_user_id(user_email):
     sql = text("""SELECT UserId FROM User WHERE UserName=:UEMAIL""")
     record = {"UEMAIL": user_email}
     user_id = connect.execute(sql, **record).first()
+    print(user_id)
     return user_id[0]
 
 

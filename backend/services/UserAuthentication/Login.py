@@ -21,15 +21,16 @@ from sqlalchemy import create_engine, select, update
 
 userLogin_bp = Blueprint('login',__name__)
 
+
 @userLogin_bp.route('/api/signin', methods=['GET', 'POST'])
 def signin():
     bcrypt = Bcrypt(current_app)
     if request.method == 'POST':
-        loginType = request.form.get('loginType')
-        username  = request.form.get('email')
-        # content = request.get_json(silent=True)
-        # loginType = content["loginType"]
-        # username = content["email"]
+        # loginType = request.form.get('loginType')
+        # username  = request.form.get('email')
+        content = request.get_json(silent=True)
+        loginType = content["loginType"]
+        username = content["email"]
         # Checking for the Login Type
         if loginType == 'google':
             session = session_factory()
@@ -66,8 +67,8 @@ def signin():
 
 # checking for the login type 
         elif loginType == "email":
-            password = request.form.get('password')
-            # password = content["password"]
+            # password = request.form.get('password')
+            password = content["password"]
             if password:
                 session = session_factory()
                 sql_stmt = (select(User.UserId, User.IsAdmin, User.Password, User.LoginType).where (User.UserName == username))
@@ -118,3 +119,4 @@ def signin():
     else:
         data_sent = {"message":"Invalid method"} 
         return make_response(jsonify(data_sent),401)
+

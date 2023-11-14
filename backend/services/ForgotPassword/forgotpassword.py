@@ -21,8 +21,9 @@ forgotpassword_bp = Blueprint('forgotpassword',__name__)
 def forgot_password():
     
     if request.method == "POST":
-        data = (request.form["email_id"])
-
+        content = request.get_json(silent=True)
+        data = content["email_id"]
+        print(data)
         #user = User.query.filter_by(username=data).first()
         session = session_factory()
         sql_stmt = (select(User.UserId, User.IsAdmin, User.LoginType).where (User.UserName == data))
