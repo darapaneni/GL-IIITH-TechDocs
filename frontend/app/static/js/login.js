@@ -46,11 +46,16 @@ function callLoginApi(loginFormData,errordiv)
            url : getApiUrl('signin'),
            success: function(data) {
             //In case of success the data contains the JSON
+            // save userAuthToken, isAdmin, FirstName, LastName
 
-                
                 localStorage.setItem('userToken', data.userAuthToken);
                 //Saving email for further references for calling backend url.
                 localStorage.setItem('email', $('#email-input').val());
+
+                // localStorage.setItem('userToken',data.userAuthToken)
+                localStorage.setItem('isAdmin',data.userAuthToken)
+                localStorage.setItem('firstName',data.FirstName)
+                localStorage.setItem('lastName',data.LastName)
                 saveTokenInSession(data.userAuthToken);
           },
           error:function(data) {

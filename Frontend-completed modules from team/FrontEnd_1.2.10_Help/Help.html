@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en-us">   
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="theme-color" content="#edf2f9">
+    <meta name="google" content="notranslate">
+    <link data-n-head="1" rel="icon" type="image/x-icon" href="/images/icons/favicon.ico">
+    <title>TechDocs</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- GLOBAL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <!-- END: GLOBAL CSS -->
+
+    <!-- PAGE CSS -->
+    
+<link rel="stylesheet" href="/css/marketing-layout.css">
+
+<style>
+    .faq-item{
+        margin-bottom: 40px;
+        margin-top: 40px;
+      }
+      .faq-body{
+        display: none;
+        margin-top: 30px;
+      }
+      .faq-wrapper{
+        width: 75%;
+        margin: 0 auto;
+      }
+      .faq-inner{
+        padding: 30px;
+        background: aliceblue;
+      }
+      .faq-plus{
+        float: right;
+        font-size: 1.4em;
+        line-height: 1em;
+        cursor: pointer;
+      }
+      hr{
+        background-color: #9b9b9b;
+      }
+</style>
+
+
+    <!-- END: PAGE CSS -->
+  </head>
+  <body>
+    <noscript>
+        Enable Javascript on your browser to let the webapp running smoothly!
+    </noscript>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </symbol>
+      <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+      </symbol>
+      <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </symbol>
+    </svg>
+    
+     
+
+    <!-- GLOBAL JS -->
+    <!--script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="/js/opensource/jquery.mockjax.js"></script>
+    <script type="module" src="/js/test/mockapi.js"></script>
+    <script src="/js/prodhelpers.js"></script>
+    <script src="/js/alerts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.js"  crossorigin="anonymous"></script>
+    <script src="/js/validators.js"></script>
+    <script src="/js/clientsecret.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="/js/logout.js"></script>
+    <!-- END:GLOBAL JS -->
+
+    <!-- PAGE JS -->
+    
+<script>
+  function redirectToLogin() {
+    window.location = "/login";
+  }
+</script>
+
+<script type="text/javascript">
+    $(document).on('click',".faq-plus",function(){
+      $(this).parent().parent().find('.faq-body').slideToggle();
+    });
+  </script>
+
+
+
+    <!-- END: PAGE JS -->
+
+    
+
+<nav class="navbar navbar-expand-lg bg-light bd-navbar">
+  <div class="container">
+    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+      <img src="/images/icons/android-chrome-192x192.png" class="header-logo"/>
+      <span class="header-text">TechDocs</span>
+    </a>
+   
+    
+    <div class="">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+          <!--Features Drop-down-->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-2 link-dark" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Features
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item active" href="/features/premium-features">Premium Features</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/features/forwriting">For Writing</a></li>
+            <li><a class="dropdown-item" href="/features/forteaching">For Teaching</a></li>
+            <li><a class="dropdown-item" href="/features/forgroups">For Group</a></li>
+            <li><a class="dropdown-item" href="/features/forpublisher">For Publishers</a></li>
+          </ul>
+        </li>
+          <li class="nav-item"><a href="/plans" class="nav-link px-2 link-dark">Pricing</a></li>
+          <li class="nav-item"><a href="/faq" class="nav-link px-2 link-dark">Help</a></li>
+          <li class="nav-item"><button type="button" class="btn btn-outline-primary me-2" onclick="redirectToLogin()">Login</button></li>
+          <li class="nav-item"><a href="/registration" class="btn btn-warning">Sign-up</a></li>
+        </ul> 
+      </div>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<main class="container-fluid body-main">
+  
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="faq-wrapper">
+          <div class="header mb-5">
+            <h1 class="text-center">Help & FAQs</h1>
+          </div>
+          <div class="faq-inner">
+            <div class="faq-item">
+              <h3>
+                What is TechDocs ?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+              <div class="faq-body">
+                TechDocs is a great on-line LaTeX editing tool that allows you to create LaTeX documents directly in your web browser. It is available as an on-premises or a cloud-based offering.
+              </div>
+            </div>
+            <hr>
+            <div class="faq-item">
+              <h3>
+                How does different users in different roles can achieve their goals using TechDocs ?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+              <div class="faq-body">
+                TechDocs help different users achieve their goals as below:<br>
+                <br>1. Authors, Teachers, Publishers - Provides tools to write, edit, collaborate, submit, and manage articles through to publication<br>
+                <br>2. Groups - Provides simple functionality to share technical docs between peers<br>
+                <br>3. Students and Researchers - TechDocs professional features that provide streamlined branded enrollment and a resource portal with featured templates, training and administrative analytics and metrics to help students, researchers, faculty and staff in universities collaborate<br>
+              </div>
+            </div>
+            <hr>
+            <div class="faq-item">
+              <h3>
+                What are the types of subscriptions available?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+              <div class="faq-body">
+                There are two types of subscriptions available.<br>
+                <br>1. Techdocs Standard
+                <br>2. Techdocs Premium
+              </div>
+            <hr>
+            <div class="faq-item">
+              <h3>
+                How to register with Techdocs?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+              <div class="faq-body">
+                If you don’t already have an account, you need to register yourself to create an account.
+                You can register by using your Google account or your Email address.
+                If you already have an account, click Login in the upper right corner, then type in your email and password and click Login.
+                After you are logged in, you should see the TechDocs Dashboard page.
+              </div>
+            </div>
+            <hr>
+            <div class="faq-item">
+              <h3>
+                How to reset the password?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+              <div class="faq-body">
+                You can simply click on the Forgot Password link on the Login page and submit your email id. An auto-generated email containing a password reset link is sent to your email id. Using that you can reset your password seamlessly.
+              </div>
+            </div>
+              <hr>
+            <div class="faq-item">
+              <h3>
+                How to create a new document using Techdocs?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+              <div class="faq-body">
+                Using Techdocs we can create anew document by the following steps:<br>
+                &emsp;i)	Log in to TechDocs by using your login credentials.<br>
+                &emsp;ii)	On the Dashboard page, click New Document --> Blank Project.<br>
+                &emsp;iii)	Enter a name for your project and click on the “tick mark” button to save the file.<br>
+              </div>
+            </div>
+              <hr>
+            <div class="faq-item">
+              <h3>
+                How to edit a document using Techdocs?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+              <div class="faq-body">
+                You can edit your LaTeX documents in TechDocs Dashboard by clicking on the file. Once you have made<br>the required changes, 
+                you can get back to doing other work as the Auto-Save feature takes care of saving<br>the document as you keep editing it making it a hassle-free save.<br>               
+              </div>
+            </div>
+              <hr>
+            <div class="faq-item">
+              <h3>
+                How to share a document using Techdocs?
+                <span class="faq-plus">&plus;</span>
+              </h3>
+                <div class="faq-body">
+                  You can share your LaTeX documents with your peers in TechDocs Dashboard by clicking on the Action<br>button against a file. 
+                  Update the user’s email id with whom you would like to share your document and <br>select the type of permissions you would like to provide. 
+                  Click on Confirm. The file is visible to the other <br>user in the Shared by Others section on the Dashboard.<br>
+                </div>
+              </div>
+                <hr>
+              <div class="faq-item">
+                <h3>
+                  How to export the document using Techdocs?
+                  <span class="faq-plus">&plus;</span>
+                </h3>
+                  <div class="faq-body">
+                    You can export TechDoc projects as a PDF file.<br>
+                    To download the PDF file<br>
+                    &emsp;i)	Open the file from the Dashboard.<br>
+                    &emsp;ii)	On the top right corner, click Download as PDF icon.<br>
+                    <br>To download a LaTex file<br>
+                    &emsp;i)	Go to Dashboard.<br>
+                    &emsp;ii)	Select the file you wish to download.<br>
+                    &emsp;iii)	Click on the Download button in the Actions section.<br>
+                  </div>
+                </div>
+                  <hr>
+                <div class="faq-item">
+                  <h3>
+                    How to delete a document using Techdocs?
+                    <span class="faq-plus">&plus;</span>
+                  </h3>
+                  <div class="faq-body">
+                    To delete a file, you must select it by clicking on the checkbox as shown below and then hit the Delete icon
+                    on the right across the file. The file is moved to Trash from where you can either delete it permanently or &emsp;restore it.<br>
+                  </div>
+                </div>
+                  <hr>
+                <div class="faq-item">
+                  <h3>
+                    How to search for a document using Techdocs?
+                  <span class="faq-plus">&plus;</span>
+                  </h3>
+                  <div class="faq-body">
+                    For searching, you can type a character or a string in the Search box and it starts listing all the files in your<br>Dashboard available for you.
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  
+
+</main>
+
+<div class="container">
+  <!--placeholder to add space for footer-->
+  <div class="form-floating mt-6 mb-6 pb-3 pt-3">
+    <span class="text-light bg-light">*</span>
+    </div>
+    </div>
+<footer class="footer bd-blue-400">
+  <div class="container">
+    <div class="grid">
+      <span class="text-muted">&copy; TechDocs</span> &nbsp;&nbsp;
+      <a target="_blank" style="color: black;" href="https://github.com/prernawaghray/GL-TechDocs/tree/front_end"><i
+          class="bi bi-github"></i></a>
+    </div>
+
+  </div>
+</footer>
+
+
+  </body> 
+</html>

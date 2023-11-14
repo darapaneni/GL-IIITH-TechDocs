@@ -1,0 +1,45 @@
+{% extends "dashboard-layout.html" %}
+
+{% block pageCss %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/trash.css') }}">
+  <!-- Include any additional CSS styles specific to the Trash page if needed -->
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Trash</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Document Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+              <!-- dummy entry -->
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>Title</th>
+                <th>Owner</th>
+                <th>Last Modified</th>
+                <th>Actions</th>
+            </tr>
+            
+            <tr class="values" style="font-style:oblique;">
+                <th><input type = "checkbox"></th>
+                <th>Test document 1</th>
+                <th>You</th>
+                <th>A month ago by you</th>
+            </tr>
+            
+        </tbody>
+    </table>
+    <button id="restore-button" class="btn btn-primary">Restore Selected</button>
+    <button id="delete-permanently-button" class="btn btn-danger">Delete Permanently</button>
+</div>
+{% endblock %}
+
+{% block pageJS %}
+  <script src="{{ url_for('static', filename='js/trash.js') }}"></script>
+  <!-- Include any JavaScript specific to the Trash page if needed -->
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "dashboard-layout.html" %}
+
+{% block pageCss%}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div style="height: 200px; width: 200px; position: fixed; top: 80%; left: 50%" id="filelist-error-message" class="errorMessage"></div>
+
+    <!-- PAGE HEADER AND SEARCH -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+     
+     
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <div class="btn-group" role="group">
+          <button id="new-doc" title="New Document" class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-file-earmark-plus"></i> New Document
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item"  onclick="window.location.href='{{url_for('latexEditor',id='new-document')}}?template=resume'">Resume Template</a></li>
+            <li><a class="dropdown-item" onclick="window.location.href='{{url_for('latexEditor',id='new-document')}}?template=blank'">Blank Template</a></li>
+          </ul>
+        </div>
+          <button id="share-doc" title="Share" class="btn disabled" style="height: 40px; width: 40px; padding: 0px;">
+            <i class="bi bi-share" style="font-size: 16px;"></i>
+          </button>
+        
+          <button id="archive-doc" title="Archive" class="btn disabled" style="height: 40px; width: 40px; padding: 0px;">
+            <i class="bi bi-file-earmark-zip" style="font-size: 16px;"></i>
+          </button>
+
+        <button id="trash-doc" style="height: 40px; width: 40px; padding: 0px;" title="Move to Trash" class="btn disabled">
+          <i class="bi bi-trash3" style="font-size: 16px;"></i>
+        </button>
+        <!-- <button id="multi-retrieve" style="height: 40px; width: 40px; padding: 0px;" title="Retrieve" class="btn disabled">
+          <i class="bi bi-arrow-90deg-right" style="font-size: 16px;"></i>
+        </button>
+        <button id="multi-delete" style="height: 40px; width: 40px; padding: 0px;" title="Delete permanently" class="btn disabled">
+          <i class="bi bi-x-circle" style="font-size: 16px;"></i>
+        </button> -->
+
+      </div>
+
+      <form>
+        <div class="input-group">
+          
+          <input type="text" id="searchfile" onkeyup="filesearch()" placeholder="Search files" class="form-control" aria-label="Search Files">
+          <input type="text" id="searchtrash" onkeyup="trashsearch()" placeholder="Search trash" class="form-control" aria-label="Search Trash" style="display:none ;">
+          <div class="input-group-text"> <i class="bi bi-search"></i></div>
+        </div>
+      </form>
+    </div>
+    <!-- END OF PAGE HEADER AND SEARCH  -->
+
+    <!-- BUTTON MENU -->
+    <!-- New Button -->
+    
+    <!-- END OF BUTTON MENU -->
+
+    <!-- USER TABLES -->
+    <div class="table-responsive border-top">
+      <table id="table1" class="table table-striped table-sm"></table>
+    </div>
+    <div>
+      <table id="table2" class="table table-striped table-sm"></table>
+    </div>
+    <!-- END OF USER TABLES -->
+  </main>
+
+  <!-- SIDEBAR MENU -->
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="position-sticky pt-3 sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item" id="my-documents">
+        <a class="nav-link active" aria-current="page" href="#" id="my-documents" onclick="getfilelist()">
+          <i class="bi bi-file-earmark-bar-graph-fill" style="font-size: 16px; padding-right: 5px;"></i>
+          My Documents
+        </a>
+      </li>
+      <li class="nav-item" id="shared">
+        <a class="nav-link" href="#" onclick="sharedlist()">
+          <i class="bi bi-share-fill" style="font-size: 16px; padding-right: 5px;"></i>
+          Shared By Others
+        </a>
+      </li>
+      <li class="nav-item" id="archived">
+        <a class="nav-link" href="#">
+          <i class="bi bi-archive-fill" style="font-size: 16px; padding-right: 5px;"></i>
+          Archived
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="trashed" href="#" onclick="trashlist()">
+          <i class="bi bi-trash3-fill" style="font-size: 16px; padding-right: 5px;"></i>
+          Trash
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+{% endblock %}
+
+{% block pageJS%}
+
+<script src="js/dashboard.js"></script>
+
+{% endblock %}
